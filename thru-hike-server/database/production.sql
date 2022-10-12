@@ -5,20 +5,22 @@ use thru_hike_logistics;
 create table trail(
 	trail_id int primary key auto_increment,
     app_user_id int,
-    trail_name varchar(300) not null
+    trail_name varchar(300) not null,
+    trail_abbreviation varchar(20) null
 );
 
 create table trail_section(
 trail_section_id int primary key auto_increment,
 app_user_id int,
-trail_section_nickname varchar(500) not null unique,
+trail_id int not null,
+section_nickname varchar(500) not null unique,
 section_start varchar(200) not null,
 section_end varchar(200) not null,
--- TODO: need whatever data necessary for weather api
+latitude decimal(9,6) null,
+longitude decimal(9,6) null,
 section_length int not null,
 section_days int not null,
 upcoming bit not null,
-trail_id int not null,
 constraint fk_trail_id
 	foreign key (trail_id)
     references trail(trail_id)
@@ -61,14 +63,10 @@ food_id int primary key auto_increment,
 app_user_id int,
 food_name varchar(500) not null,
 calories int null,
-price int null,
-weight int null,
+price decimal(13,2) null,
+weight decimal(4,2) null,
 requires_stove bit null,
-food_notes varchar(500) null,
-trail_id int not null,
-constraint fk_food_idea_trail_id
-	foreign key (trail_id)
-    references trail(trail_id)
+food_notes varchar(500) null
 );
 
 create table resupply_item(
@@ -94,17 +92,17 @@ app_user_id int,
 alert_category_name varchar(200)not null
 );
 
-create table alert(
+create table section_alert(
 alert_id int primary key auto_increment,
 app_user_id int,
 alert_category_id int not null,
 alert_content varchar(1000) not null,
 trail_section_id int not null,
 future_sections bit not null,
-constraint fk_alert_trail_section_id
+constraint fk_section_alert_trail_section_id
 	foreign key (trail_section_id)
     references trail_section(trail_section_id),
-constraint fk_alert_category_id
+constraint fk_section_alert_category_id
 	foreign key (alert_category_id)
     references alert_category(alert_category_id)
 );
@@ -143,7 +141,7 @@ create table town_exit(
 exit_item_id int primary key auto_increment,
 app_user_id int,
 exit_item_name varchar(50) not null,
-item_okay bit not null
+good_to_go bit not null
 );
 
 create table contact_category(
