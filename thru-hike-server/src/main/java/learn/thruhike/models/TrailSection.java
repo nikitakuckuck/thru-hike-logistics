@@ -4,6 +4,7 @@ public class TrailSection {
 
     private int trailSectionId;
     private int appUserId;
+    private int trailId;
     private Trail trail;
     private String sectionNickname;
     private String sectionStart;
@@ -28,6 +29,14 @@ public class TrailSection {
 
     public void setAppUserId(int appUserId) {
         this.appUserId = appUserId;
+    }
+
+    public int getTrailId() {
+        return trailId;
+    }
+
+    public void setTrailId(int trailId) {
+        this.trailId = trailId;
     }
 
     public Trail getTrail() {

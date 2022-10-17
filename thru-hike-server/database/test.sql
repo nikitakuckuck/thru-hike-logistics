@@ -203,9 +203,9 @@ values
 
 insert into trail_section (trail_section_id, app_user_id, trail_id, section_nickname, section_start, section_end, latitude, longitude, section_length, section_days, upcoming)
 values
-(1,1,2,'Doc Campbells to Pie Town', 'Doc Campbells', 'Pie Town', null, null, 100, 5, true),
-(2,1,1,'Border to Hart\'s Pass','Canadian Border', 'Hart\'s Pass',70,-90, 30,3,false),
-(3,1,1,'Border to first town', 'Mexican Border', 'First Town', null, null, 80, 6, true);
+(1,1,2,'Doc Campbells to Pie Town', 'Doc Campbells', 'Pie Town', null, null, 100, 5, 1),
+(2,1,1,'Border to Hart\'s Pass','Canadian Border', 'Hart\'s Pass',70,-90, 30,3,0),
+(3,1,1,'Border to first town', 'Mexican Border', 'First Town', null, null, 80, 6, 1);
 
 end //
 delimiter ;

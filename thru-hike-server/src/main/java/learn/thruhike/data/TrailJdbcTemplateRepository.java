@@ -2,6 +2,7 @@ package learn.thruhike.data;
 
 import learn.thruhike.data.mappers.TrailMapper;
 import learn.thruhike.models.Trail;
+import learn.thruhike.models.TrailSection;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
