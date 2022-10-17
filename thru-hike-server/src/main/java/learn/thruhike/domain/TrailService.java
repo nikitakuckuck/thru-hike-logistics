@@ -29,7 +29,7 @@ public class TrailService {
             return result;
         }
         if (trail.getTrailId() != 0){
-            result.addErrorMessage("The trail id cannot be set before adding a trail");
+            result.addErrorMessage("The trail id cannot be set before adding a trail.");
         }
         result.setPayload(repository.add(trail));
         return result;
@@ -42,7 +42,7 @@ public class TrailService {
             return result;
         }
         if(trail.getTrailId()==0){
-            result.addErrorMessage("A trail id is required for updating a trail");
+            result.addErrorMessage("A trail id is required for updating a trail.");
         }
         if(!repository.update(trail)){
            result.addErrorMessage(messageWithId(trail.getTrailId()));
@@ -62,18 +62,18 @@ public class TrailService {
     private Result<Trail> validate(Trail trail){
         Result<Trail> result = new Result<>();
         if(trail==null){
-            result.addErrorMessage("Trail cannot be null");
+            result.addErrorMessage("Trail cannot be null.");
             return result;
         }
         if(trail.getTrailName()==null || trail.getTrailName().isBlank()){
-            result.addErrorMessage("Trail name is required");
+            result.addErrorMessage("Trail name is required.");
         }
         return result;
     }
 
     //error message which shows the id
     private String messageWithId(int id){
-        return String.format("A trail with the ID: %s was not found",id);
+        return String.format("A trail with the ID: %s was not found.",id);
     }
 
 }

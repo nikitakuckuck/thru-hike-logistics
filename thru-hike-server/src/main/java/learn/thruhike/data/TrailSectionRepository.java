@@ -9,6 +9,8 @@ public interface TrailSectionRepository {
 
     List<TrailSection> findAllUpcoming();
 
+    List<TrailSection> findByTrailId(int id);
+
     TrailSection findById(int id);
 
     TrailSection findBySectionNickname(String nickname);

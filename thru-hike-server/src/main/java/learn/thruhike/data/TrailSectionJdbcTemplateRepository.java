@@ -41,6 +41,15 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     }
 
     @Override
+    public List<TrailSection> findByTrailId(int id){
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "from trail_section s " +
+                "join trail t on s.trail_id = t.trail_id where s.trail_id = ?;";
+        return template.query(sql, new TrailSectionMapper(), id);
+    }
+
+    @Override
     public TrailSection findById(int id) {
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +

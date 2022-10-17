@@ -44,7 +44,7 @@ public class TrailController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody Trail trail) {
         if (trail.getTrailId() != id){
-            return new ResponseEntity<>("The request ID does not match the trail ID", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("The request ID does not match the trail ID.", HttpStatus.CONFLICT);
         }
         Result<Trail> result = trailService.update(trail);
 

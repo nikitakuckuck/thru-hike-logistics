@@ -44,6 +44,12 @@ class TrailSectionJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldFindByTrailId(){
+        List<TrailSection> sectionsOfPct = repository.findByTrailId(1);
+        assertTrue(sectionsOfPct.size()>0 && sectionsOfPct.size()<4);
+    }
+
+    @Test
     void shouldFindById(){
         TrailSection section = repository.findById(1);
         assertNotNull(section);
