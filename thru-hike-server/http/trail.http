@@ -1,0 +1,71 @@
+@url =http://localhost:8080/api/trail
+
+### should get all trails using test database
+GET {{url}} HTTP/1.1
+
+### should return PCT
+GET {{url}}/1 HTTP/1.1
+
+###
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailName": "Rouge River Trail",
+    "trailAbbreviation": "RRT"
+}
+
+### should return 400 error
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailId": 7,
+    "trailName": "Rouge River Trail",
+    "trailAbbreviation": "RRT"
+}
+### should return 400 error
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailAbbreviation": "RRT"
+}
+
+###
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailId": 1,
+    "trailName": "Pacific Crest Trail",
+    "trailAbbreviation": ""
+}
+
+### should return 409 conflict
+PUT {{url}}/6 HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailId": 1,
+    "trailName": "Pacific Crest Trail",
+    "trailAbbreviation": ""
+}
+### should return 400 error
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "trailId": 1,
+    "trailName": "",
+    "trailAbbreviation": "PCT"
+}
+
+### 
+DELETE {{url}}/3 HTTP/1.1
+
+### should return 404 error
+DELETE {{url}}/8 HTTP/1.1
+
+
+
