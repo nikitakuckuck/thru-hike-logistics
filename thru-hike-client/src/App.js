@@ -1,9 +1,9 @@
-import './App.css';
+import TrailDisplay from './components/TrailDisplay';
 
 function App() {
   return (
     <div className="App">
-      <h2>Hello World</h2>
+      <TrailDisplay/>
     </div>
   );
 }

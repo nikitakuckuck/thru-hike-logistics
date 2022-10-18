@@ -24,7 +24,7 @@ public class TrailJdbcTemplateRepository implements TrailRepository {
 
     @Override
     public List<Trail> findAll(){
-        final String sql = "select trail_id, app_user_id, trail_name, trail_abbreviation from trail;";
+        final String sql = "select trail_id, app_user_id, trail_name, trail_abbreviation from trail order by trail_name asc;";
         return template.query(sql, new TrailMapper());
     }
 
