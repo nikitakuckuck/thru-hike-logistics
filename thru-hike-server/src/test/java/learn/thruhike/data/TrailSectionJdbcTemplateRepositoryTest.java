@@ -40,7 +40,7 @@ class TrailSectionJdbcTemplateRepositoryTest {
     @Test
     void shouldFindUpcoming(){
         List<TrailSection> upcomingSections = repository.findAllUpcoming();
-        assertTrue(upcomingSections.size()==2);
+        assertTrue(upcomingSections.size()>=2);
     }
 
     @Test
@@ -112,7 +112,7 @@ class TrailSectionJdbcTemplateRepositoryTest {
         section.setSectionEnd("town three");
         section.setSectionLength(80);
         section.setSectionDays(5);
-        section.isUpcoming();
+        section.setUpcoming(true);
 
         return section;
     }

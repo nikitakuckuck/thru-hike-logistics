@@ -29,7 +29,7 @@ public class TrailService {
             return result;
         }
         if (trail.getTrailId() != 0){
-            result.addErrorMessage("The trail id cannot be set before adding a trail.");
+            result.addErrorMessage("The trail ID cannot be set before adding a trail.");
         }
         result.setPayload(repository.add(trail));
         return result;
@@ -42,7 +42,8 @@ public class TrailService {
             return result;
         }
         if(trail.getTrailId()==0){
-            result.addErrorMessage("A trail id is required for updating a trail.");
+            result.addErrorMessage("A trail ID is required for updating a trail.");
+            return result;
         }
         if(!repository.update(trail)){
            result.addErrorMessage(messageWithId(trail.getTrailId()));

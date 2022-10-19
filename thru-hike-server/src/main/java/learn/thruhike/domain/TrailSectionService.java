@@ -18,45 +18,68 @@ public class TrailSectionService {
         this.trailRepository = trailRepository;
     }
 
-    public List<TrailSection> findAll(){
+    public List<TrailSection> findAll() {
         return sectionRepository.findAll();
     }
 
-    public List<TrailSection> findAllUpcoming(){
+    public List<TrailSection> findAllUpcoming() {
         return sectionRepository.findAllUpcoming();
     }
 
-    public List<TrailSection> findByTrailId(int id){
+    public List<TrailSection> findByTrailId(int id) {
         return sectionRepository.findByTrailId(id);
     }
 
-    public TrailSection findById(int id){
+    public TrailSection findById(int id) {
         return sectionRepository.findById(id);
     }
 
-    public TrailSection findBySectionNickname(String nickname){
+    public TrailSection findBySectionNickname(String nickname) {
         return sectionRepository.findBySectionNickname(nickname);
     }
-//
-//    public  Result<TrailSection> add(TrailSection section){
-//
-//    }
-//
-//    public Result<TrailSection> update(TrailSection section){
-//
-//    }
-//
-//    public Result<TrailSection> deleteById(int id){
-//
-//    }
+
+    public Result<TrailSection> add(TrailSection section) {
+        Result<TrailSection> result = validateSection(section);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (section.getTrailSectionId() != 0) {
+            result.addErrorMessage("The trail section ID cannot be set before adding a trail.");
+        }
+        result.setPayload(sectionRepository.add(section));
+        return result;
+    }
+
+    public Result<TrailSection> update(TrailSection section) {
+        Result<TrailSection> result = validateSection(section);
+        if (!result.isSuccess()) {
+            return result;
+        }
+        if (section.getTrailSectionId() == 0) {
+            result.addErrorMessage("A trail section ID is required for updating a trail.");
+            return result;
+        }
+        if (!sectionRepository.update(section)) {
+            result.addErrorMessage(messageWithId(section.getTrailId()));
+        }
+        return result;
+    }
+
+    public Result<TrailSection> deleteById(int id){
+        Result<TrailSection> result = new Result<>();
+        if(!sectionRepository.deleteById(id)){
+            result.addErrorMessage(messageWithId(id));
+        }
+        return result;
+    }
 
     /*
     validation requirements: trail id, section nickname, section start,
-    section end, section days, and upcoming are all required. Unique nickname is required. Trail id must match an existing trail.
-    Trail days must be 30 or fewer, because anything above that is almost certainly a typo or beyond the scope of this app's design.
+    section end, section length, section days, and upcoming are all required. Unique nickname is required. Trail id must match an existing trail.
+    Trail days must be 30 or fewer, because anything above that is almost certainly a typo or beyond the scope of this app's design. Latitude and Longitude
+    must fall within accepted parameters.
     */
 
-    //TODO: validate numbers,  latitude, longitude, sectionLength;
     private Result<TrailSection> validateSection(TrailSection section){
         Result<TrailSection> result = new Result<>();
         if(section==null){
@@ -99,9 +122,18 @@ public class TrailSectionService {
         if(section.getSectionDays()==0){
             result.addErrorMessage("Number of days is required.");
         }
+        if(section.getSectionLength()<1 || section.getSectionLength()>500){
+            result.addErrorMessage("Section length is required and must be between 1 and 500.");
+        }
         if(section.getSectionDays()>30){
             result.addErrorMessage("Number of days cannot be greater than 30. " +
                     "Please create a shorter section, go into town, and get some food so you don't starve.");
+        }
+        if(section.getLongitude() <0 || section.getLongitude()>180){
+            result.addErrorMessage("Longitude must be between 0 and 180.");
+        }
+        if(section.getLatitude() <-90 || section.getLatitude()>90){
+            result.addErrorMessage("Latitude must be between -90 and 90.");
         }
         return result;
     }
