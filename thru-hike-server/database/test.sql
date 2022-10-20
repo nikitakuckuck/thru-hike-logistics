@@ -13,7 +13,6 @@ create table trail_section(
 trail_section_id int primary key auto_increment,
 app_user_id int,
 trail_id int not null,
-section_nickname varchar(500) not null unique,
 section_start varchar(200) not null,
 section_end varchar(200) not null,
 latitude decimal(9,6) null,
@@ -201,11 +200,11 @@ values
 (1,1,'Pacific Crest Trail', 'PCT'),
 (2,1,'Continental Divide Trail', 'CDT');
 
-insert into trail_section (trail_section_id, app_user_id, trail_id, section_nickname, section_start, section_end, latitude, longitude, section_length, section_days, upcoming)
+insert into trail_section (trail_section_id, app_user_id, trail_id, section_start, section_end, latitude, longitude, section_length, section_days, upcoming)
 values
-(1,1,2,'Doc Campbells to Pie Town', 'Doc Campbells', 'Pie Town', null, null, 100, 5, 1),
-(2,1,1,'Border to Hart\'s Pass','Canadian Border', 'Hart\'s Pass',70,-90, 30,3,0),
-(3,1,1,'Border to first town', 'Mexican Border', 'First Town', null, null, 80, 6, 1);
+(1,1,2,'Doc Campbells', 'Pie Town', null, null, 100, 5, 1),
+(2,1,1,'Canadian Border', 'Hart\'s Pass',70,-90, 30,3,0),
+(3,1,1,'Mexican Border', 'First Town', null, null, 80, 6, 1);
 
 end //
 delimiter ;

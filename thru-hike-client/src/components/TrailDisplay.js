@@ -32,7 +32,7 @@ function TrailDisplay(){
 
     return(<>
     <h2 className="mt-3">Trails</h2>
-    <button className="btn btn-sm btn-primary mb-3 mr-2">Add aTrail</button>
+    <button className="btn btn-sm btn-primary mb-3 mr-2">Add a Trail</button>
     <button onClick={editModeClick} className="btn btn-sm btn-primary mb-3" >{editMode === false ? "Edit or Delete a Trail" : "Exit Edit Mode"}</button>
     <table>
         <thead></thead>

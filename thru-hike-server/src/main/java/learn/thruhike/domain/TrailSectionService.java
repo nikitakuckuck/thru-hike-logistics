@@ -34,9 +34,6 @@ public class TrailSectionService {
         return sectionRepository.findById(id);
     }
 
-    public TrailSection findBySectionNickname(String nickname) {
-        return sectionRepository.findBySectionNickname(nickname);
-    }
 
     public Result<TrailSection> add(TrailSection section) {
         Result<TrailSection> result = validateSection(section);
@@ -75,7 +72,7 @@ public class TrailSectionService {
 
     /*
     validation requirements: trail id, section nickname, section start,
-    section end, section length, section days, and upcoming are all required. Unique nickname is required. Trail id must match an existing trail.
+    section end, section length, section days, and upcoming are all required. Trail id must match an existing trail.
     Trail days must be 30 or fewer, because anything above that is almost certainly a typo or beyond the scope of this app's design. Latitude and Longitude
     must fall within accepted parameters.
     */
@@ -97,20 +94,6 @@ public class TrailSectionService {
         }
         if(!trailExists){
             result.addErrorMessage("A trail for this section does not exist. The corresponding trail must be created first before a section for the trail can be added.");
-        }
-
-        if(section.getSectionNickname() == null || section.getSectionNickname().isBlank()){
-            result.addErrorMessage("Trail section nickname is required. An example of a common nickname format might be \"Starting Town to Ending Town\".");
-        }
-        // nicknames must be unique as a way to easily identify sections, since there may be different routes between the same two towns
-        boolean unique = true;
-        for(TrailSection s : sectionRepository.findAll()){
-            if (s.getSectionNickname().equalsIgnoreCase(section.getSectionNickname())){
-                unique = false;
-            }
-        }
-        if(!unique){
-            result.addErrorMessage("Nickname cannot be the same as another trail section nickname.");
         }
 
         if(section.getSectionStart()==null || section.getSectionStart().isBlank()){

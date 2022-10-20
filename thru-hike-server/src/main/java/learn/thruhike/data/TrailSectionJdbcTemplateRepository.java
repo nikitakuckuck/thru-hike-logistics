@@ -24,7 +24,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public List<TrailSection> findAll() {
-        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id;";
@@ -33,7 +33,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public List<TrailSection> findAllUpcoming(){
-        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.upcoming = 1;";
@@ -42,7 +42,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public List<TrailSection> findByTrailId(int id){
-        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.trail_id = ?;";
@@ -51,7 +51,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public TrailSection findById(int id) {
-        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where trail_section_id = ?;";
@@ -64,7 +64,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public TrailSection findBySectionNickname(String nickname){
-        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, s.section_nickname, " +
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.section_nickname = ?;";
@@ -77,23 +77,22 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public TrailSection add(TrailSection section) {
-        final String sql = "insert into trail_section (app_user_id, trail_id, section_nickname, " +
+        final String sql = "insert into trail_section (app_user_id, trail_id, " +
                 "section_start, section_end, latitude, longitude, section_length, section_days, upcoming) " +
-                "values(?,?,?,?,?,?,?,?,?,?);";
+                "values(?,?,?,?,?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = template.update(con -> {
             PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, section.getAppUserId());
             preparedStatement.setInt(2, section.getTrailId());
-            preparedStatement.setString(3, section.getSectionNickname());
-            preparedStatement.setString(4, section.getSectionStart());
-            preparedStatement.setString(5, section.getSectionEnd());
-            preparedStatement.setDouble(6, section.getLatitude());
-            preparedStatement.setDouble(7, section.getLongitude());
-            preparedStatement.setInt(8, section.getSectionLength());
-            preparedStatement.setInt(9, section.getSectionDays());
-            preparedStatement.setBoolean(10, section.isUpcoming());
+            preparedStatement.setString(3, section.getSectionStart());
+            preparedStatement.setString(4, section.getSectionEnd());
+            preparedStatement.setDouble(5, section.getLatitude());
+            preparedStatement.setDouble(6, section.getLongitude());
+            preparedStatement.setInt(7, section.getSectionLength());
+            preparedStatement.setInt(8, section.getSectionDays());
+            preparedStatement.setBoolean(9, section.isUpcoming());
             return preparedStatement;
         }, keyHolder);
         if (rowsAffected <= 0) {
@@ -106,10 +105,10 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
 
     @Override
     public boolean update(TrailSection section) {
-        final String sql = "update trail_section set trail_id = ?, section_nickname = ?, section_start = ?, " +
+        final String sql = "update trail_section set trail_id = ?, section_start = ?, " +
                 "section_end = ?, latitude = ?, longitude = ?, section_length = ?, section_days = ?, " +
                 "upcoming = ? where trail_section_id = ?;";
-        int rowsAffected = template.update(sql, section.getTrailId(), section.getSectionNickname(),
+        int rowsAffected = template.update(sql, section.getTrailId(),
                 section.getSectionStart(), section.getSectionEnd(), section.getLatitude(), section.getLongitude(),
                 section.getSectionLength(), section.getSectionDays(), section.isUpcoming(), section.getTrailSectionId());
         setTrail(section);

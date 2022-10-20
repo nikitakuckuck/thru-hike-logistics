@@ -13,7 +13,6 @@ create table trail_section(
 trail_section_id int primary key auto_increment,
 app_user_id int,
 trail_id int not null,
-section_nickname varchar(500) not null unique,
 section_start varchar(200) not null,
 section_end varchar(200) not null,
 latitude decimal(9,6) null,

@@ -55,18 +55,12 @@ class TrailSectionJdbcTemplateRepositoryTest {
         assertNotNull(section);
         assertEquals("Pie Town", section.getSectionEnd());
     }
-    @Test
-    void shouldFindByNickname(){
-        TrailSection section = repository.findBySectionNickname("Doc Campbells to Pie Town");
-        assertNotNull(section);
-        assertEquals(1,section.getTrailSectionId());
-    }
 
     @Test
     void shouldAdd(){
         TrailSection newSection = repository.add(makeSectionOne());
         assertNotNull(newSection);
-        assertEquals("Pacific Crest Trail",newSection.getTrail().getTrailName());
+        assertEquals("PCT",newSection.getTrail().getTrailAbbreviation());
     }
 
     @Test
@@ -107,7 +101,6 @@ class TrailSectionJdbcTemplateRepositoryTest {
         TrailSection section = new TrailSection();
         section.setAppUserId(1);
         section.setTrailId(1);
-        section.setSectionNickname("Leg two");
         section.setSectionStart("town two");
         section.setSectionEnd("town three");
         section.setSectionLength(80);

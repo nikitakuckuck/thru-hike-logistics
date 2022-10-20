@@ -60,7 +60,6 @@ class TrailSectionServiceTest {
         assertFalse(result.isSuccess());
         assertTrue(result.getErrorMessages().contains("Section start is required."));
         assertTrue(result.getErrorMessages().contains("Trail id is required."));
-        assertTrue(result.getErrorMessages().contains("Trail section nickname is required. An example of a common nickname format might be \"Starting Town to Ending Town\"."));
         assertTrue(result.getErrorMessages().contains("Section end is required."));
         assertTrue(result.getErrorMessages().contains("Number of days is required."));
         assertTrue(result.getErrorMessages().contains("Section length is required and must be between 1 and 500."));
@@ -117,7 +116,6 @@ class TrailSectionServiceTest {
     private TrailSection makeNewSection(){
         TrailSection section = new TrailSection();
         section.setTrailId(1);
-        section.setSectionNickname("Section One");
         section.setSectionStart("First Town");
         section.setSectionEnd("Second Town");
         section.setLongitude(80);

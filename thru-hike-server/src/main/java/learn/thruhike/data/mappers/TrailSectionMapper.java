@@ -14,7 +14,6 @@ public class TrailSectionMapper implements RowMapper<TrailSection> {
         section.setTrailSectionId(rs.getInt("trail_section_id"));
         section.setAppUserId(rs.getInt("app_user_id"));
         section.setTrailId(rs.getInt("trail_id"));
-        section.setSectionNickname(rs.getString("section_nickname"));
         section.setSectionStart(rs.getString("section_start"));
         section.setSectionEnd(rs.getString("section_end"));
         section.setLatitude(rs.getDouble("latitude"));

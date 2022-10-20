@@ -6,7 +6,6 @@ public class TrailSection {
     private int appUserId;
     private int trailId;
     private Trail trail;
-    private String sectionNickname;
     private String sectionStart;
     private String sectionEnd;
     private double latitude;
@@ -45,14 +44,6 @@ public class TrailSection {
 
     public void setTrail(Trail trail) {
         this.trail = trail;
-    }
-
-    public String getSectionNickname() {
-        return sectionNickname;
-    }
-
-    public void setSectionNickname(String sectionNickname) {
-        this.sectionNickname = sectionNickname;
     }
 
     public String getSectionStart() {
