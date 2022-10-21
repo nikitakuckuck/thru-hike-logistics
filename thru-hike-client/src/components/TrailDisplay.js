@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Trail from "./Trail";
 
-const DEFAULT_TRAILS = []
-const DEFAULT_EDIT_MODE = false;
+const DEFAULT_TRAILS = [];
 
 function TrailDisplay(){
     const [trails, setTrails]= useState(DEFAULT_TRAILS);

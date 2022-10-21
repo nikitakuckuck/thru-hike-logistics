@@ -2,6 +2,7 @@
 import {BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
+import TrailDeleteConfirmation from "./components/TrailDeleteConfirmation";
 import TrailDisplay from './components/TrailDisplay';
 import TrailForm from './components/TrailForm';
 import TrailSectionDisplay from './components/TrailSectionDisplay';
@@ -20,10 +21,10 @@ function App() {
                 <Link to="/" className="nav-link">Home</Link>
               </li>
               <li className="nav-item">
-                <Link to="/trails" className="nav-link">All Trails</Link>
+                <Link to="/trails" className="nav-link">Trails</Link>
               </li>
               <li className="nav-item">
-                <Link to="/sections" className="nav-link">All Sections</Link>
+                <Link to="/sections" className="nav-link">Sections</Link>
               </li>
               <li className="nav-item">
                 <Link to="/about" className="nav-link">About</Link>
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route path={["/trails/add", "/trails/edit/:editTrailId"]}>
             <TrailForm/>
+          </Route>
+          <Route path={"/trails/delete/:deleteTrailId"}>
+            <TrailDeleteConfirmation/>
           </Route>
           <Route path="/sections">
             <TrailSectionDisplay/>

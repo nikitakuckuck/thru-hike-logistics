@@ -72,7 +72,7 @@ public class TrailService {
         }
         boolean isUnique = true;
         for(Trail t : repository.findAll()){
-            if(t.getTrailName().equalsIgnoreCase(trail.getTrailName())){
+            if(t.getTrailName().equalsIgnoreCase(trail.getTrailName()) && t.getTrailId() != trail.getTrailId()){
                 isUnique= false;
                 break;
             }

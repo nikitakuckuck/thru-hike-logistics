@@ -57,15 +57,13 @@ function TrailForm (){
     }
 
     const updateTrail = ()=>{
-        const updateTrail = {trailId: editTrailId,...trail};
+
         const init = {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({updateTrail})
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(trail)
         };
-        fetch(`http://localhost:8080/api/trail/${editTrailId}`, init)
+        fetch(`http://localhost:8080/api/trail/${editTrailId}`,init)
         .then(resp =>{
             if(resp.status === 204){
                 return null;
