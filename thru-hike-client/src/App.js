@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <button className="navbar-toggler" type="button" data-toggle = "collapse" data-target = "#menu" aria-expanded="false" aria-label="Toggle navigation">
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+          <button className="navbar-toggler" type="button" data-toggle = "collapse" data-target = "#menu" aria-controls= "#menu" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse " id="menu">

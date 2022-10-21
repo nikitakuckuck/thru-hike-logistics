@@ -14,12 +14,13 @@ function TrailForm (){
         if(editTrailId){
             fetch(`http://localhost:8080/api/trail/${editTrailId}`)
             .then(resp=>{
-                if(resp.status===200){
-                    return resp.json();
-                } else if(resp.status===404){
-                    //add routing to Not Found page
-                } else {
-                    return Promise.reject("Something has gone wrong.");
+                switch(resp.status){
+                    case 200:
+                        return resp.json();
+                    case 404:
+                        return null;
+                        //add routing to not found
+                    default: return Promise.reject("Something has gone wrong.");
                 }
             })
             .then(body =>{
@@ -41,10 +42,15 @@ function TrailForm (){
         };
         fetch('http://localhost:8080/api/trail', init)
         .then(resp =>{
-            if(resp.status === 201 || resp.status===400){
-                return resp.json();
+            switch(resp.status){
+                case 201:
+                case 400:
+                    return resp.json();
+                default:
+                    return Promise.reject("Something has gone wrong");
+
             }
-            return Promise.reject("Something has gone wrong");
+            
         })
         .then(body=>{
             if(body.trailId){
@@ -65,14 +71,18 @@ function TrailForm (){
         };
         fetch(`http://localhost:8080/api/trail/${editTrailId}`,init)
         .then(resp =>{
-            if(resp.status === 204){
-                return null;
-            } else if(resp.status===400){
-                return resp.json();
-            } else if(resp.status===404){
-                //add routing to not found pg
+            switch(resp.status){
+                case 204:
+                    return null;
+                case 400:
+                    return resp.json();
+                case 404:
+                    return null;
+                    //add routing to not found
+                default: 
+                    return Promise.reject("Something has gone wrong");
             }
-            return Promise.reject("Something has gone wrong");
+            
         })
         .then(body=>{
             if(!body){
@@ -116,8 +126,8 @@ function TrailForm (){
             <input name="trailAbbreviation" type="text" className="form-control" id="trailAbbreviation" value={trail.trailAbbreviation} onChange={handleChange}/>
         </div>
         <div className="form-group">
-            <button type="submit" className="btn btn-primary mr-2">Submit</button>
-            <button type="button" className="btn btn-primary" onClick={handleCancel}>Cancel</button>
+            <button type="submit" className="btn btn-green mr-2">Submit</button>
+            <button type="button" className="btn btn-blue" onClick={handleCancel}>Cancel</button>
         </div>
     </form>
     </>)

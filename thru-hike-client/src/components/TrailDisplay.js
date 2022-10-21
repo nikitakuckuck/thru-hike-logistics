@@ -12,10 +12,11 @@ function TrailDisplay(){
     useEffect(()=>{
         fetch('http://localhost:8080/api/trail')
         .then(resp =>{
-            if(resp.status===200){
-                return resp.json();
+            switch(resp.status){
+                case 200:
+                    return resp.json();
+                default: Promise.reject("Something has gone wrong.");
             }
-            return Promise.reject("Something has gone wrong.");
         })
         .then(data=>{
             setTrails(data);
@@ -34,9 +35,9 @@ function TrailDisplay(){
     const handleAddClick= ()=> history.push('/trails/add');
 
     return(<>
-    <h2 className="mt-3">Trails</h2>
-    <button className="btn btn-sm btn-primary mb-3 mr-2" onClick={handleAddClick}>Add a Trail</button>
-    <button onClick={editModeClick} className="btn btn-sm btn-primary mb-3" >{editMode === false ? "Edit or Delete a Trail" : "Exit Edit Mode"}</button>
+    <h2>Trails</h2>
+    <button className="btn btn-sm btn-green mb-3 mr-2" onClick={handleAddClick}>Add</button>
+    <button onClick={editModeClick} className="btn btn-sm btn-blue mb-3" >{editMode === false ? "Edit or Delete a Trail" : "Exit Edit Mode"}</button>
     <table>
         <caption>List of Trails</caption>
         <thead></thead>

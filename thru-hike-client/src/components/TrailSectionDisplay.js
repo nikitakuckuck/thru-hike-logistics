@@ -37,8 +37,8 @@ function TrailSectionDisplay (){
     return(<>
     <h2>Trail Sections</h2>
     
-    <button className="btn btn-sm btn-primary mb-3 mr-2">Add a Section</button>
-    <button onClick={editModeClick} className="btn btn-sm btn-primary mb-3" >{sectionEditMode === false ? "Edit or Delete a Section" : "Exit Edit Mode"}</button>
+    <button className="btn btn-sm btn-green mb-3 mr-2">Add a Section</button>
+    <button onClick={editModeClick} className="btn btn-sm btn-blue mb-3" >{sectionEditMode === false ? "Edit or Delete a Section" : "Exit Edit Mode"}</button>
     <table className="table table-hover">
     <caption>List of Sections</caption>
         <thead className="thead-dark">

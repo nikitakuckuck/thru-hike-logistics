@@ -60,13 +60,13 @@ function TrailDeleteConfirmation (){
 
     return(<>
     <h2>Delete Confirmation</h2>
-    <div className="alert alert-secondary" role="alert">
-        <p>{trail.trailName } ({trail.trailAbbreviation})</p>
+    <div className="alert alert-danger" role="alert">
+        <p>{trail.trailAbbreviation === ""? `${trail.trailName}`: `${trail.trailName} (${trail.trailAbbreviation})`}</p>
     </div>
-    <p>Are you sure you want to delete this trail? This action will also <strong>delete all sections, notes, etc. that are associated with this trail.</strong></p>
+    <p>Are you sure you want to delete this trail? This action will <strong> also delete all sections, notes, etc. that are associated with this trail.</strong></p>
     <div>
-        <button type="button" className="btn btn-primary mr-2" onClick={handleConfirmDelete}>Delete this trail and all its associated data</button>
-        <button type="button" className="btn btn-primary" onClick={handleCancelDelete}>Do Not Delete</button>
+        <button type="button" className="btn btn-red mr-2" onClick={handleConfirmDelete}>Delete this trail and all its associated data</button>
+        <button type="button" className="btn btn-blue" onClick={handleCancelDelete}>Do Not Delete</button>
     </div>
     
     </>)

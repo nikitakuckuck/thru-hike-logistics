@@ -10,10 +10,10 @@ function Trail({trail, editMode}){
 
     return (<>
     <tr>
-        <td>{trail.trailName } ({trail.trailAbbreviation})</td>
-        <td>{editMode === true ? <button className="btn btn-primary btn btn-sm mr-2" onClick={handleEditClick}>Edit</button>
+        <td>{trail.trailAbbreviation === ""? `${trail.trailName}`: `${trail.trailName} (${trail.trailAbbreviation})`}</td>
+        <td>{editMode === true ? <button className="btn btn-blue btn btn-sm mr-2" onClick={handleEditClick}>Edit</button>
          : null}
-         {editMode === true ? <button className="btn btn-primary btn btn-sm" onClick={handleDeleteClick}>Delete</button>
+         {editMode === true ? <button className="btn btn-red btn btn-sm" onClick={handleDeleteClick}>Delete</button>
          : null}
             
         </td>

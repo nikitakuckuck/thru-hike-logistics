@@ -1,0 +1,40 @@
+body {
+    background-color: #ffffff;
+}
+h2 {
+    padding-left: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.btn-green {
+    color: white;
+    background-color: #6c8863;
+    border-color: #5b7253
+}
+
+.btn-green:hover {
+    color: white;
+    background-color: #5b7253
+}
+
+.btn-red {
+    color: white;
+    background-color: #a74d36;
+    border-color: #914330
+}
+
+.btn-red:hover {
+    color: white;
+    background-color: #914330
+}
+.btn-blue {
+    color: white;
+    background-color: #616e85;
+    border-color: #505a6d
+}
+
+.btn-blue:hover {
+    color: white;
+    background-color: #505a6d
+}
