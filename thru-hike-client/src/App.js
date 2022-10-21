@@ -1,11 +1,55 @@
+
+import {BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import About from "./components/About";
+import Home from "./components/Home";
 import TrailDisplay from './components/TrailDisplay';
+import TrailForm from './components/TrailForm';
 import TrailSectionDisplay from './components/TrailSectionDisplay';
 
 function App() {
   return (
     <div className="App">
-      <TrailDisplay/>
-      <TrailSectionDisplay/>
+      <Router>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <button className="navbar-toggler" type="button" data-toggle = "collapse" data-target = "#menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse " id="menu">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link to="/" className="nav-link">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/trails" className="nav-link">All Trails</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/sections" className="nav-link">All Sections</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/about" className="nav-link">About</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <Switch>    
+          <Route exact path = "/">
+            <Home/>
+          </Route>
+          <Route exact path="/trails">
+            <TrailDisplay/>
+          </Route>
+          <Route path={["/trails/add", "/trails/edit/:editTrailId"]}>
+            <TrailForm/>
+          </Route>
+          <Route path="/sections">
+            <TrailSectionDisplay/>
+          </Route>
+          <Route path="/about">
+            <About/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

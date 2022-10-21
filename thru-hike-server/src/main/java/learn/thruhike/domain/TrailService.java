@@ -66,8 +66,19 @@ public class TrailService {
             result.addErrorMessage("Trail cannot be null.");
             return result;
         }
+
         if(trail.getTrailName()==null || trail.getTrailName().isBlank()){
             result.addErrorMessage("Trail name is required.");
+        }
+        boolean isUnique = true;
+        for(Trail t : repository.findAll()){
+            if(t.getTrailName().equalsIgnoreCase(trail.getTrailName())){
+                isUnique= false;
+                break;
+            }
+        }
+        if(!isUnique){
+            result.addErrorMessage("Trail name cannot be the same as an existing trail name. Please add an identifying feature to the name. For example, if you want to add each state of the Pacific Crest Trail as a separate trail, you could write \"Pacific Crest Trail, WA\".");
         }
         return result;
     }

@@ -5,7 +5,7 @@ use thru_hike_logistics;
 create table trail(
 	trail_id int primary key auto_increment,
     app_user_id int,
-    trail_name varchar(300) not null,
+    trail_name varchar(300) not null unique,
     trail_abbreviation varchar(20) null
 );
 
