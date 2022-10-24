@@ -5,7 +5,9 @@ import Home from "./components/Home";
 import TrailDeleteConfirmation from "./components/TrailDeleteConfirmation";
 import TrailDisplay from './components/TrailDisplay';
 import TrailForm from './components/TrailForm';
+import TrailSectionDeleteConfirmation from "./components/TrailSectionDeleteConfirmation";
 import TrailSectionDisplay from './components/TrailSectionDisplay';
+import TrailSectionForm from "./components/TrailSectionForm";
 
 function App() {
   return (
@@ -46,8 +48,14 @@ function App() {
           <Route path={"/trails/delete/:deleteTrailId"}>
             <TrailDeleteConfirmation/>
           </Route>
-          <Route path="/sections">
+          <Route exact path="/sections">
             <TrailSectionDisplay/>
+          </Route>
+          <Route path={["/sections/add", "/sections/edit/:editSectionId"]}>
+            <TrailSectionForm/>
+          </Route>
+          <Route path={"/sections/delete/:deleteSectionId"}>
+            <TrailSectionDeleteConfirmation/>
           </Route>
           <Route path="/about">
             <About/>

@@ -27,7 +27,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
                 "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
                 "from trail_section s " +
-                "join trail t on s.trail_id = t.trail_id;";
+                "join trail t on s.trail_id = t.trail_id order by t.trail_name;";
         return template.query(sql, new TrailSectionMapper());
     }
 

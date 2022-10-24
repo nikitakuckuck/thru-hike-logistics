@@ -39,20 +39,14 @@ function TrailDeleteConfirmation (){
         .then(resp =>{
             switch(resp.status){
                 case 204:
-                    return null;
+                    history.push('/trails');
+                    break;
                 case 404:
                     //add routing to not found pg
                     break;
                 default:
                     return Promise.reject("Something has gone wrong.");
 
-            }
-        })
-        .then(resp =>{
-            if(!resp){
-                history.push('/trails');
-            } else{
-                //add not found routing
             }
         })
         .catch(err=>console.log("Error: ", err));
