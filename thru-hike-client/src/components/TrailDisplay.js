@@ -35,7 +35,7 @@ function TrailDisplay(){
     const handleAddClick= ()=> history.push('/trails/add');
 
     return(<>
-    <h2>Trails</h2>
+    <h2>My Trails</h2>
     <button className="btn btn-sm btn-green mb-3 mr-2" onClick={handleAddClick}>Add</button>
     <button onClick={editModeClick} className="btn btn-sm btn-blue mb-3" >{editMode === false ? "Edit or Delete a Trail" : "Exit Edit Mode"}</button>
     <table>

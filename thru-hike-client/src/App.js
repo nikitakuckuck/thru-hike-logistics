@@ -2,6 +2,7 @@
 import {BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
+import TownExitDisplay from "./components/TownExitDisplay";
 import TrailDeleteConfirmation from "./components/TrailDeleteConfirmation";
 import TrailDisplay from './components/TrailDisplay';
 import TrailForm from './components/TrailForm';
@@ -59,6 +60,9 @@ function App() {
           </Route>
           <Route path="/about">
             <About/>
+          </Route>
+          <Route path="/exit_checklist">
+            <TownExitDisplay/>
           </Route>
         </Switch>
       </Router>

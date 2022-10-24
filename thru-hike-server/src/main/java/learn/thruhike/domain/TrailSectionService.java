@@ -84,7 +84,7 @@ public class TrailSectionService {
             return result;
         }
         if(section.getTrailId() == 0){
-            result.addErrorMessage("Trail id is required.");
+            result.addErrorMessage("Trail is required.");
         }
         boolean trailExists = false;
         for(Trail t : trailRepository.findAll()){
@@ -93,7 +93,7 @@ public class TrailSectionService {
             }
         }
         if(!trailExists){
-            result.addErrorMessage("A trail for this section does not exist. The corresponding trail must be created first before a section for the trail can be added.");
+            result.addErrorMessage("This trail does not exist. The corresponding trail must be created first before a section for the trail can be added.");
         }
 
         if(section.getSectionStart()==null || section.getSectionStart().isBlank()){

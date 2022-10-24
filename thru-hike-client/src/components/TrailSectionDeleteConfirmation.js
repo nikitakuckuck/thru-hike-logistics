@@ -54,7 +54,7 @@ function TrailSectionDeleteConfirmation(){
     return(<>
         <h2>Delete Confirmation</h2>
     <div className="alert alert-danger" role="alert">
-        <p>Section: {section.sectionStart} - {section.sectionEnd}, {section.trail.trailName}</p>
+        <p>{section.sectionStart} - {section.sectionEnd}, {section.trail.trailName}</p>
         <p>{section.sectionLength} miles, {section.sectionDays} days</p>
     </div>
     <p>Are you sure you want to delete this section? This action will <strong> also delete all notes, resupply lists, etc. that are associated with this section.</strong></p>

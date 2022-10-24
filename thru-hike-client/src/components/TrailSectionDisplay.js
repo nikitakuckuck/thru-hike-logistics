@@ -37,7 +37,7 @@ function TrailSectionDisplay (){
     const handleAddClick = ()=> history.push('/sections/add');
 
     return(<>
-    <h2>Trail Sections</h2>
+    <h2>My Trail Sections</h2>
     
     <button onClick = {handleAddClick} className="btn btn-sm btn-green mb-3 mr-2">Add a Section</button>
     <button onClick={editModeClick} className="btn btn-sm btn-blue mb-3" >{sectionEditMode === false ? "Edit or Delete a Section" : "Exit Edit Mode"}</button>
