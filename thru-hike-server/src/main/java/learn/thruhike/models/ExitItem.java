@@ -1,6 +1,6 @@
 package learn.thruhike.models;
 
-public class TownExit {
+public class ExitItem {
     private int exitItemId;
     private int appUserId;
     private String exitItemName;

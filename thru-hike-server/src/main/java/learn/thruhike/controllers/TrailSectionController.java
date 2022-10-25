@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/section")
+@RequestMapping("/api/sections")
 @CrossOrigin(origins = {"http://127.0.0.1:3000", "http://localhost:3000"})
 public class TrailSectionController {
 

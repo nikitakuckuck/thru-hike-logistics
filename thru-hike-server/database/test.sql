@@ -136,7 +136,7 @@ calendar_item_name varchar(50) not null,
 calendar_item_content varchar(1000) null
 );
 
-create table town_exit(
+create table exit_item(
 exit_item_id int primary key auto_increment,
 app_user_id int,
 exit_item_name varchar(50) not null,
@@ -194,6 +194,8 @@ delete from trail_section;
 alter table trail_section auto_increment = 1;
 delete from trail;
 alter table trail auto_increment = 1;
+delete from exit_item;
+alter table exit_item auto_increment = 1;
 
 insert into trail (trail_id, app_user_id, trail_name, trail_abbreviation) 
 values
@@ -205,6 +207,13 @@ values
 (1,1,2,'Doc Campbells', 'Pie Town', null, null, 100, 5, 1),
 (2,1,1,'Canadian Border', 'Hart\'s Pass',70,-90, 30,3,0),
 (3,1,1,'Mexican Border', 'First Town', null, null, 80, 6, 1);
+
+insert into exit_item (exit_item_id, app_user_id, exit_item_name, good_to_go)
+values
+(1,1,'Charge electronics',1),
+(2,1,'resupply',0),
+(3,1,'call the fam',0),
+(4,1,'download episodes',0);
 
 end //
 delimiter ;

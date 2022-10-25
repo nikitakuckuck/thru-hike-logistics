@@ -136,7 +136,7 @@ calendar_item_name varchar(50) not null,
 calendar_item_content varchar(1000) null
 );
 
-create table town_exit(
+create table exit_item(
 exit_item_id int primary key auto_increment,
 app_user_id int,
 exit_item_name varchar(50) not null,
