@@ -12,7 +12,7 @@ function TrailForm (){
 
     useEffect(()=>{
         if(editTrailId){
-            fetch(`http://localhost:8080/api/trail/${editTrailId}`)
+            fetch(`http://localhost:8080/api/trails/${editTrailId}`)
             .then(resp=>{
                 switch(resp.status){
                     case 200:
@@ -40,7 +40,7 @@ function TrailForm (){
             },
             body: JSON.stringify({...trail})
         };
-        fetch('http://localhost:8080/api/trail', init)
+        fetch('http://localhost:8080/api/trails', init)
         .then(resp =>{
             switch(resp.status){
                 case 201:
@@ -69,7 +69,7 @@ function TrailForm (){
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(trail)
         };
-        fetch(`http://localhost:8080/api/trail/${editTrailId}`,init)
+        fetch(`http://localhost:8080/api/trails/${editTrailId}`,init)
         .then(resp =>{
             switch(resp.status){
                 case 204:

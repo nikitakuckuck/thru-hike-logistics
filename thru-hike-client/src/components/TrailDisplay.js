@@ -10,7 +10,7 @@ function TrailDisplay(){
     const history = useHistory();
 
     useEffect(()=>{
-        fetch('http://localhost:8080/api/trail')
+        fetch('http://localhost:8080/api/trails')
         .then(resp =>{
             switch(resp.status){
                 case 200:

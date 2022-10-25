@@ -12,7 +12,7 @@ function TrailSectionDeleteConfirmation(){
 
     useEffect(()=>{
         if(deleteSectionId){
-            fetch(`http://localhost:8080/api/section/${deleteSectionId}`)
+            fetch(`http://localhost:8080/api/sections/${deleteSectionId}`)
             .then(resp =>{
                 switch(resp.status){
                     case 200:
@@ -35,7 +35,7 @@ function TrailSectionDeleteConfirmation(){
         const init = {
             method: 'DELETE'
         };
-        fetch(`http://localhost:8080/api/section/${deleteSectionId}`, init)
+        fetch(`http://localhost:8080/api/sections/${deleteSectionId}`, init)
         .then(resp =>{
             switch(resp.status){
                 case 204:

@@ -13,7 +13,7 @@ function Home (){
 
     useEffect(()=>{
         if(sectionId){
-            fetch(`http://localhost:8080/api/section/${sectionId}`)
+            fetch(`http://localhost:8080/api/sections/${sectionId}`)
             .then(resp=>{
                 switch(resp.status){
                     case 200:

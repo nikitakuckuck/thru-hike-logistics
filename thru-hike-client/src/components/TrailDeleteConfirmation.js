@@ -12,7 +12,7 @@ function TrailDeleteConfirmation (){
 
     useEffect(()=>{
         if(deleteTrailId){
-            fetch(`http://localhost:8080/api/trail/${deleteTrailId}`)
+            fetch(`http://localhost:8080/api/trails/${deleteTrailId}`)
             .then(resp =>{
                 switch(resp.status){
                     case 200:
@@ -35,7 +35,7 @@ function TrailDeleteConfirmation (){
         const init = {
             method: 'DELETE'
         };
-        fetch(`http://localhost:8080/api/trail/${deleteTrailId}`, init)
+        fetch(`http://localhost:8080/api/trails/${deleteTrailId}`, init)
         .then(resp =>{
             switch(resp.status){
                 case 204:

@@ -61,7 +61,7 @@ function App() {
           <Route path="/about">
             <About/>
           </Route>
-          <Route path="/exit_checklist">
+          <Route path="/exit-checklist">
             <TownExitDisplay/>
           </Route>
         </Switch>

@@ -9,7 +9,7 @@ function TrailSectionDisplay (){
     const history = useHistory();
 
     useEffect(()=>{
-        fetch('http://localhost:8080/api/section')
+        fetch('http://localhost:8080/api/sections')
         .then(resp =>{
             if(resp.status===200){
                 return resp.json();

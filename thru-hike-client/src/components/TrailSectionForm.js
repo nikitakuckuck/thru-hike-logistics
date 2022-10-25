@@ -13,7 +13,7 @@ const {editSectionId} = useParams();
 
     useEffect(()=>{
         if(editSectionId){
-            fetch(`http://localhost:8080/api/section/${editSectionId}`)
+            fetch(`http://localhost:8080/api/sections/${editSectionId}`)
             .then(resp=>{
                 switch(resp.status){
                     case 200:
@@ -42,7 +42,7 @@ const {editSectionId} = useParams();
             },
             body: JSON.stringify({...section})
         };
-        fetch('http://localhost:8080/api/section', init)
+        fetch('http://localhost:8080/api/sections', init)
         .then(resp =>{
             switch(resp.status){
                 case 201:
@@ -64,7 +64,7 @@ const {editSectionId} = useParams();
 
 
     useEffect(()=>{
-        fetch('http://localhost:8080/api/trail')
+        fetch('http://localhost:8080/api/trails')
         .then(resp=>{
             switch(resp.status){
                 case 200:
@@ -87,7 +87,7 @@ const {editSectionId} = useParams();
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(section)
         };
-        fetch(`http://localhost:8080/api/section/${editSectionId}`,init)
+        fetch(`http://localhost:8080/api/sections/${editSectionId}`,init)
         .then(resp =>{
             switch(resp.status){
                 case 204:
