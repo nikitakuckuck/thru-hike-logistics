@@ -2,7 +2,7 @@
 import {BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
-import TownExitDisplay from "./components/TownExitDisplay";
+import TownExitDisplay from "./components/ExitItemDisplay";
 import TrailDeleteConfirmation from "./components/TrailDeleteConfirmation";
 import TrailDisplay from './components/TrailDisplay';
 import TrailForm from './components/TrailForm';

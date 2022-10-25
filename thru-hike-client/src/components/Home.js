@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import SectionAlerts from "./SectionAlerts";
-import TownExitDisplay from "./TownExitDisplay";
+import ExitItemDisplay from "./ExitItemDisplay";
 
 const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true, trail: {trailName: ""}};
 
 function Home (){
     const [section, setSection] = useState(DEFAULT_SECTION);
-    const sectionId = 6;
+    const sectionId = 1;
     let allComplete = false;
     const history = useHistory();
 
@@ -34,7 +34,7 @@ function Home (){
         }
     }, [sectionId]);
 
-    const handleExitChecklistClick = ()=> history.push("exit_checklist");
+    const handleExitChecklistClick = ()=> history.push("exit-checklist");
     
     
     return(<>
