@@ -14,7 +14,6 @@ import java.util.List;
 @CrossOrigin(origins = {"http://127.0.0.1:3000", "http://localhost:3000"})
 public class TrailSectionController {
 
-    //TODO consider getting rid of section nicknames
 
     private final TrailSectionService service;
 
