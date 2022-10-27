@@ -88,7 +88,6 @@ constraint fk_resupply_item_food_id
 
 create table alert_category(
 alert_category_id int primary key auto_increment,
-app_user_id int,
 alert_category_name varchar(200)not null
 );
 
@@ -187,6 +186,17 @@ emergency_info_id int primary key auto_increment,
 app_user_id int,
 emergency_info_note varchar(400) not null
 );
+
+insert into alert_category (alert_category_id,  alert_category_name)
+values
+(1,"OTHER"),
+(2,"CLOSURE"),
+(3,"WATER"),
+(4,"WEATHER"),
+(5,"FIRE"),
+(6,"WEEKEND"),
+(7,"CALENDAR"),
+(8,"GEAR");
 
 
 

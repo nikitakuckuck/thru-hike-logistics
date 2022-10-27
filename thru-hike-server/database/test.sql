@@ -88,7 +88,6 @@ constraint fk_resupply_item_food_id
 
 create table alert_category(
 alert_category_id int primary key auto_increment,
-app_user_id int,
 alert_category_name varchar(200)not null
 );
 
@@ -188,9 +187,22 @@ app_user_id int,
 emergency_info_note varchar(400) not null
 );
 
+insert into alert_category (alert_category_id,  alert_category_name)
+values
+(1,"OTHER"),
+(2,"CLOSURE"),
+(3,"WATER"),
+(4,"WEATHER"),
+(5,"FIRE"),
+(6,"WEEKEND"),
+(7,"CALENDAR"),
+(8,"GEAR");
+
 delimiter //
 create procedure set_known_good_state()
 begin
+delete from section_alert;
+alter table section_alert auto_increment=1;
 delete from trail_section;
 alter table trail_section auto_increment = 1;
 delete from trail;
@@ -215,6 +227,14 @@ values
 (2,1,'resupply',0),
 (3,1,'call the fam',0),
 (4,1,'download episodes',0);
+
+insert into section_alert (alert_id, app_user_id, alert_category_id, alert_content, trail_section_id, future_sections)
+values
+(1,1,1,'Test Alert',1,0),
+(2,1,8,'Pick up bear can',2,0),
+(3,1,2,'Trail closed',2,1),
+(4,1,2,'Bridge out and trail closed',2,0),
+(5,1,2,'Trail closed for trail work',2,0);
 
 end //
 delimiter ;

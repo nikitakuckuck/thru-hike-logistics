@@ -136,7 +136,7 @@ function ExitItemDisplay (){
         <button onClick={handleBackToSummary} className = "btn btn-blue mr-2 mb-3">Back To Section Summary</button>
         <button onClick ={handleResetClick} className="btn btn-grey  mb-3">Reset List</button>
         {/* progress bar for checklist progress */}
-        {items.length ===0? <p>Add an item to start creating your town exit checklist!</p> :
+        {items.length ===0? <p>Add an item to start creating your town exit checklist! Include anything you want to check off every time you leave a town, for example, 'Charge electronics', or 'Fill up water bottles'.</p> :
         <div className="progress mb-2">
             <div className="progress-bar" role="progressbar" style={{width: `${progress}%`}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
         </div>

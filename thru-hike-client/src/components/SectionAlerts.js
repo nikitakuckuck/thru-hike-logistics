@@ -1,6 +1,6 @@
 function SectionAlerts(){
     return(<>
-    <div className="alert alert-danger" role="alert">
+    <div className="alert alert-red" role="alert">
         <p>Alerts:</p>
     </div>
     </>)

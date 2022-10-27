@@ -7,9 +7,17 @@ function About(){
     <p>
         As a long-distance hiker, town days can become the most stressful part of the hike. All you want to do is grab a shower, eat a few thousand calories, and charge your electronics. This app provides a central place for all your town day logistics: reminders, alerts, resupply lists, etc. so you don't have to spend time and energy trying to remember everything you need to do before hitting the trail again.
     </p>
-    <h3>Future Features:</h3>
+    <h3 className="pt-3">Current Features:</h3>
+        <ul>
+            <li><strong>Trails and sections</strong>: create trails and add sections to those trails, with the ability to choose your current section for display on the Section Summary page.</li>
+            <li><strong>Section Summary home page</strong>: displays everything you need for your current town and upcoming section of trail.</li>
+            <li>
+                <strong>Town Exit Checklist</strong>: for peace of mind that you've finished all your to-dos before you hit the trail again.
+            </li>
+        </ul>
+    <h3 className="pt-3">Future Features:</h3>
     <p>These features don't exist yet, but they're in the works!</p>
-    <h4>A section summary page, with everything you need for your current town and upcoming section of trail:</h4>
+
     <ul>
         <li>
             <strong>Area alerts</strong>: links to fire alerts, trail closures, water reports, etc.
@@ -19,9 +27,6 @@ function About(){
         </li>
         <li>
             <strong>Resupply list</strong>: a place to keep your shopping list, with an option to add reminders for recurring purchases so you don't run out of something important 50 miles from a town.
-        </li>
-        <li>
-            <strong>Town Exit Checklist</strong>: for peace of mind as you hit the trail again.
         </li>
         <li>
             <strong>To-Download</strong>: make sure you don't forget which e-books, apps, playlists, etc you want to download before you leave town.
@@ -35,9 +40,6 @@ function About(){
         <li>
             <strong>Town contacts</strong>: store any PO general delivery addresses, trail angel phone numbers, etc.
         </li>
-    </ul>
-    <h4>Other General features:</h4>
-    <ul>
         <li>
             <strong>Food ideas list</strong>: store all your food ideas here, or add them to the resupply list if you decide to try them out.
         </li>

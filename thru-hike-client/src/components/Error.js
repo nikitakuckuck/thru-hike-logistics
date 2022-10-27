@@ -1,6 +1,6 @@
 function Error ({errors}){
     return(<>
-    <div className="alert alert-danger" role="alert">
+    <div className="alert alert-red" role="alert">
         <ul>
             {errors.map(error =><li key={error}>{error}</li>)}
         </ul>
