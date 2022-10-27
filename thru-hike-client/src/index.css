@@ -53,3 +53,7 @@ h2 {
 .btn-checklist {
     text-align: left;
 }
+
+.active {
+    background-color: rgb(192, 204, 192);
+}

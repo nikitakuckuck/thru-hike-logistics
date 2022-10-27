@@ -45,6 +45,7 @@ function TrailSectionDisplay (){
     <caption>List of Sections</caption>
         <thead className="thead-dark">
             <tr>
+                <th></th>
                 <th>Status</th>
                 <th>Trail</th>
                 <th>Start</th>

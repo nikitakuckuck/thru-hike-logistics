@@ -59,7 +59,6 @@ class TrailSectionServiceTest {
         Result<TrailSection> result = service.add(section);
         assertFalse(result.isSuccess());
         assertTrue(result.getErrorMessages().contains("Section start is required."));
-        assertTrue(result.getErrorMessages().contains("Trail id is required."));
         assertTrue(result.getErrorMessages().contains("Section end is required."));
         assertTrue(result.getErrorMessages().contains("Number of days is required."));
         assertTrue(result.getErrorMessages().contains("Section length is required and must be between 1 and 500."));

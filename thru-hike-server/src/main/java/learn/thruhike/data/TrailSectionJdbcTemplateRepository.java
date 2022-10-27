@@ -123,7 +123,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     public boolean update(TrailSection section) {
 
         //only one section may be active at any given time
-        if(section.isActive() && section.getTrailSectionId()!= findActive().getTrailSectionId()){
+        if(section.isActive() && findActive()!= null && section.getTrailSectionId()!= findActive().getTrailSectionId()){
             final String sql = "update trail_section set active = 0 where trail_section_id = ?;";
             template.update(sql, findActive().getTrailSectionId());
         }

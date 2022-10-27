@@ -10,7 +10,10 @@ function ExitItemDisplay (){
     const [items, setItems]= useState([]);
 
     const [incomplete, setIncomplete]= useState([]);
-    let progress = ((items.length - incomplete.length)/items.length)*100;
+    const [progress, setProgress] = useState(0);
+
+    //switched to using State for progress so progress bar would have a default of 0
+    // let progress = Math.round(((items.length - incomplete.length)/items.length)*100);
     
 
 
@@ -40,6 +43,7 @@ function ExitItemDisplay (){
         })
         .then(data=>{
             setIncomplete(data);
+            setProgress(Math.round(((items.length - incomplete.length)/items.length)*100));
         })
         .catch(err=>console.log("Error: ", err));
     })
