@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import SectionAlerts from "./SectionAlerts";
+import ExitItem from "./ExitItem";
+import Home from "./Home";
 
 const DEFAULT_ITEM = {exitItemId: 0, exitItemName: "", isGoodToGo: false};
 
-function ExitItemDisplay ({allComplete}){
+function ExitItemDisplay (props){
     const history = useHistory();
     const [newItem, setNewItem] = useState(DEFAULT_ITEM);
     const [items, setItems]= useState([]);
-    //todo: change progress const to number of checked boxes.
-    const progress = 30.56;
+
+    const [incomplete, setIncomplete]= useState([]);
+    let progress = ((items.length - incomplete.length)/items.length)*100;
+    
+
 
     useEffect(()=>{
         fetch(`http://localhost:8080/api/exit-items`)
@@ -25,29 +29,28 @@ function ExitItemDisplay ({allComplete}){
         })
         .catch(err=>console.log("Error: ", err));
     },[])
+
+    useEffect(()=>{
+        fetch(`http://localhost:8080/api/exit-items/incomplete`)
+        .then(resp =>{
+            switch(resp.status){
+                case 200:
+                    return resp.json();
+                default: Promise.reject("Something has gone wrong.");
+            }
+        })
+        .then(data=>{
+            setIncomplete(data);
+        })
+        .catch(err=>console.log("Error: ", err));
+    })
     
     const handleChange = evt =>{
         const property = evt.target.name;
-        const valueType = evt.target.type=== "checkbox" ? "checked" : "value";
-        const value = evt.target[valueType];
+        const value = evt.target.value;
         const changedItem = {...newItem};
         changedItem[property]=value;
         setNewItem(changedItem);
-
-        let checklistBoxes = document.getElementById("exitChecklist").getElementsByTagName("input");
-        let boxCount = 0;
-    for(let i = 0; i<checklistBoxes.length; i++){
-        if(!checklistBoxes[i].checked){
-            allComplete=false;
-        } else{
-            boxCount++;
-            // change color of label to grey out?
-        }
-    }
-    if(boxCount===checklistBoxes.length){
-        allComplete=true;
-    }
-
     }
 
     const addNewItem= ()=>{
@@ -62,6 +65,8 @@ function ExitItemDisplay ({allComplete}){
         .then(resp =>{
             switch (resp.status){
                 case 201:
+                    window.location.reload();
+                    break;
                 case 400:
                     return resp.json();
                 default:
@@ -90,24 +95,22 @@ function ExitItemDisplay ({allComplete}){
         </button>
         <button onClick={handleBackToSummary} className = "btn btn-blue mb-3">Back To Section Summary</button>
 
-        {/* progress bar for checklist progress - possibly move to home page?*/}
+        {/* progress bar for checklist progress */}
         <div className="progress mb-2">
             <div className="progress-bar" role="progressbar" style={{width: `${progress}%`}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
         </div>
-        
 
-        <form id="exitChecklist">
-            {items.map(item => 
-                <div key = {item.exitItemId} className="form-group ml-4">
-                <input type="checkbox" id={item.exitItemId} name="checkAlerts"  className="form-check-input" onChange={handleChange}/>
-                <label htmlFor="checkAlerts">{item.exitItemName}</label>
-            </div>
-            )}
-        </form>
+        <table className="table table-hover">
+            <thead>
+            </thead>
+            <tbody>
+                 {items.map(item=> <ExitItem key={item.exitItemId} item = {item}/>)}
+            </tbody>
+        </table>
        
        
        
-       {/* testing out a modal for adding items. still need to exit modal after successful add*/}
+       {/* testing out a modal for adding items*/}
 
 <div className="modal fade" id="addWindow"  role="dialog" aria-labelledby="addTitle" aria-hidden="true">
   <div className="modal-dialog modal-dialog-centered" role="document">
@@ -116,17 +119,16 @@ function ExitItemDisplay ({allComplete}){
         <h5 className="modal-title" id="addTitle">Add a New Checklist Item</h5>
         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">
+            </button>
+                </div>
+                    <div className="modal-body">
+                    <label htmlFor="exitItemName">Item Name</label>
+                        <input name="exitItemName" type="text" className="form-control" id="exitItemName" value={newItem.exitItemName} onChange={handleChange}/>
 
-                  <label htmlFor="exitItemName">Item Name</label>
-            <input name="exitItemName" type="text" className="form-control" id="exitItemName" value={newItem.exitItemName} onChange={handleChange}/>
-
-    </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-blue" data-dismiss="modal">Close Without Saving</button>
-        <button type="button" className="btn btn-green" onClick={addNewItem}>Add Item</button>
+                    </div>
+                <div className="modal-footer">
+            <button type="button" className="btn btn-blue" data-dismiss="modal">Close Without Saving</button>
+        <button type="button" className="btn btn-green" data-dismiss="modal" onClick={addNewItem}>Add Item</button>
       </div>
     </div>
   </div>
