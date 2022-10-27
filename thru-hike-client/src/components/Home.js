@@ -59,6 +59,7 @@ function Home (){
     
     return(<>
     <h2>Section Summary: {section.sectionStart} - {section.sectionEnd}</h2>
+    {/* TODO: possibly add logic so the button is only visible when the checklist has at least one item? */}
     <button className={incomplete.length===0 ? "btn btn-green mb-3" : "btn btn-red mb-3"} onClick={handleExitChecklistClick}><strong>{incomplete.length===0 ? "Completed" : "Not Completed"}</strong>: Town Exit Checklist </button>
     </>)
 }

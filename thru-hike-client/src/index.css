@@ -39,6 +39,17 @@ h2 {
     background-color: #505a6d
 }
 
+.btn-grey {
+    color: white;
+    background-color: #767b83;
+    border-color: #62666d
+}
+
+.btn-grey:hover {
+    color: white;
+    background-color: #62666d
+}
+
 .btn-checklist {
     text-align: left;
 }

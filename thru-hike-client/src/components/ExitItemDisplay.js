@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ExitItem from "./ExitItem";
-import Home from "./Home";
 
 const DEFAULT_ITEM = {exitItemId: 0, exitItemName: "", isGoodToGo: false};
 
-function ExitItemDisplay (props){
+function ExitItemDisplay (){
     const history = useHistory();
     const [newItem, setNewItem] = useState(DEFAULT_ITEM);
     const [items, setItems]= useState([]);
@@ -83,6 +82,43 @@ function ExitItemDisplay (props){
         .catch(err=> console.log("Error: ", err));
 
     }
+
+
+    //Resets each item in the items list to a 'goodToGo' value of false
+    const handleResetClick = ()=>{
+        items.forEach(item =>{
+
+        const itemToUpdate = {...item};
+            itemToUpdate.goodToGo = false;
+        
+        const init = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({...itemToUpdate})
+        };
+        fetch(`http://localhost:8080/api/exit-items/${item.exitItemId}`, init)
+        .then(resp =>{
+            switch (resp.status){
+                case 204:
+                    window.location.reload();
+                    break;
+                case 400:
+                    return resp.json();
+                case 404:
+                    return null;
+                default:
+                    return Promise.reject("Something has gone wrong");
+            }
+        })
+        .catch(err =>console.log("Error: ", err));
+    }
+        )
+
+        }
+
+        
   
 
     const handleBackToSummary = ()=> history.push("");
@@ -93,12 +129,14 @@ function ExitItemDisplay (props){
         <button type="button" className="btn btn-green mr-2 mb-3" data-toggle="modal" data-target="#addWindow">
             Add New Item
         </button>
-        <button onClick={handleBackToSummary} className = "btn btn-blue mb-3">Back To Section Summary</button>
-
+        <button onClick={handleBackToSummary} className = "btn btn-blue mr-2 mb-3">Back To Section Summary</button>
+        <button onClick ={handleResetClick} className="btn btn-grey  mb-3">Reset List</button>
         {/* progress bar for checklist progress */}
+        {items.length ===0? <p>Add an item to start creating your town exit checklist!</p> :
         <div className="progress mb-2">
             <div className="progress-bar" role="progressbar" style={{width: `${progress}%`}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
         </div>
+        }
 
         <table className="table table-hover">
             <thead>
