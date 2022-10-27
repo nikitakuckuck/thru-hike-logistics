@@ -20,6 +20,7 @@ longitude decimal(9,6) null,
 section_length int not null,
 section_days int not null,
 upcoming bit not null,
+active bit not null,
 constraint fk_trail_id
 	foreign key (trail_id)
     references trail(trail_id)

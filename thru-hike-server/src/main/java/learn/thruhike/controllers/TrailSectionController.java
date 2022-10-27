@@ -35,6 +35,7 @@ public class TrailSectionController {
     public List<TrailSection> findByTrailId(@PathVariable int id){
         return service.findByTrailId(id);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<TrailSection> findById(@PathVariable int id){
         TrailSection section = service.findById(id);
@@ -42,6 +43,15 @@ public class TrailSectionController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(section, HttpStatus.OK);
+    }
+
+    @GetMapping("/active")
+    public ResponseEntity<TrailSection> findActive(){
+        TrailSection section = service.findActive();
+        if(section==null){
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(section,HttpStatus.OK);
     }
 
     @PostMapping

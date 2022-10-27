@@ -21,6 +21,7 @@ public class TrailSectionMapper implements RowMapper<TrailSection> {
         section.setSectionLength(rs.getInt("section_length"));
         section.setSectionDays(rs.getInt("section_days"));
         section.setUpcoming(rs.getBoolean("upcoming"));
+        section.setActive(rs.getBoolean("active"));
 
         TrailMapper trailMapper = new TrailMapper();
         section.setTrail(trailMapper.mapRow(rs,rowNum));

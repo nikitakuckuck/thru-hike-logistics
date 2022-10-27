@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -25,7 +26,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     @Override
     public List<TrailSection> findAll() {
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
-                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id order by t.trail_name;";
         return template.query(sql, new TrailSectionMapper());
@@ -34,7 +35,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     @Override
     public List<TrailSection> findAllUpcoming(){
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
-                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.upcoming = 1;";
         return template.query(sql, new TrailSectionMapper());
@@ -43,16 +44,29 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     @Override
     public List<TrailSection> findByTrailId(int id){
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
-                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.trail_id = ?;";
         return template.query(sql, new TrailSectionMapper(), id);
     }
 
     @Override
+    public TrailSection findActive(){
+        final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
+                "from trail_section s " +
+                "join trail t on s.trail_id = t.trail_id where s.active = 1;";
+        try {
+            return template.query(sql, new TrailSectionMapper()).stream().findFirst().orElse(null);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
     public TrailSection findById(int id) {
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
-                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where trail_section_id = ?;";
         try {
@@ -65,7 +79,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     @Override
     public TrailSection findBySectionNickname(String nickname){
         final String sql = "select s.trail_section_id, s.app_user_id, s.trail_id, t.trail_name, t.trail_abbreviation, " +
-                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming " +
+                "s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active " +
                 "from trail_section s " +
                 "join trail t on s.trail_id = t.trail_id where s.section_nickname = ?;";
         try {
@@ -78,8 +92,8 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     @Override
     public TrailSection add(TrailSection section) {
         final String sql = "insert into trail_section (app_user_id, trail_id, " +
-                "section_start, section_end, latitude, longitude, section_length, section_days, upcoming) " +
-                "values(?,?,?,?,?,?,?,?,?);";
+                "section_start, section_end, latitude, longitude, section_length, section_days, upcoming, active) " +
+                "values(?,?,?,?,?,?,?,?,?,?);";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = template.update(con -> {
@@ -93,6 +107,7 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
             preparedStatement.setInt(7, section.getSectionLength());
             preparedStatement.setInt(8, section.getSectionDays());
             preparedStatement.setBoolean(9, section.isUpcoming());
+            preparedStatement.setBoolean(10, section.isActive());
             return preparedStatement;
         }, keyHolder);
         if (rowsAffected <= 0) {
@@ -104,13 +119,21 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     }
 
     @Override
+    @Transactional
     public boolean update(TrailSection section) {
+
+        //only one section may be active at any given time
+        if(section.isActive() && section.getTrailSectionId()!= findActive().getTrailSectionId()){
+            final String sql = "update trail_section set active = 0 where trail_section_id = ?;";
+            template.update(sql, findActive().getTrailSectionId());
+        }
+
         final String sql = "update trail_section set trail_id = ?, section_start = ?, " +
                 "section_end = ?, latitude = ?, longitude = ?, section_length = ?, section_days = ?, " +
-                "upcoming = ? where trail_section_id = ?;";
+                "upcoming = ?, active = ? where trail_section_id = ?;";
         int rowsAffected = template.update(sql, section.getTrailId(),
                 section.getSectionStart(), section.getSectionEnd(), section.getLatitude(), section.getLongitude(),
-                section.getSectionLength(), section.getSectionDays(), section.isUpcoming(), section.getTrailSectionId());
+                section.getSectionLength(), section.getSectionDays(), section.isUpcoming(), section.isActive(), section.getTrailSectionId());
         setTrail(section);
         return rowsAffected > 0;
     }

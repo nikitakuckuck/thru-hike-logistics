@@ -13,6 +13,7 @@ public class TrailSection {
     private int sectionLength;
     private int sectionDays;
     private boolean upcoming;
+    private boolean active;
 
     public int getTrailSectionId() {
         return trailSectionId;
@@ -100,5 +101,13 @@ public class TrailSection {
 
     public void setUpcoming(boolean upcoming) {
         this.upcoming = upcoming;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

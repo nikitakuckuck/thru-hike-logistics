@@ -30,6 +30,10 @@ public class TrailSectionService {
         return sectionRepository.findByTrailId(id);
     }
 
+    public TrailSection findActive(){
+        return sectionRepository.findActive();
+    }
+
     public TrailSection findById(int id) {
         return sectionRepository.findById(id);
     }

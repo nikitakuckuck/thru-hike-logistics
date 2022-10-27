@@ -11,6 +11,8 @@ public interface TrailSectionRepository {
 
     List<TrailSection> findByTrailId(int id);
 
+    TrailSection findActive();
+
     TrailSection findById(int id);
 
     TrailSection findBySectionNickname(String nickname);
