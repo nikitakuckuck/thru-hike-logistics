@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 function TrailSection({section, sectionEditMode}){
     const history = useHistory();
 
+    const handleDetailsClick = ()=> history.push(`/sections/details/${section.trailSectionId}`)
+
     const handleEditClick = ()=> history.push(`/sections/edit/${section.trailSectionId}`)
 
     const handleDeleteClick = ()=>history.push(`/sections/delete/${section.trailSectionId}`)
@@ -53,6 +55,7 @@ function TrailSection({section, sectionEditMode}){
         <td>{section.sectionEnd}</td>
         <td>{section.sectionLength}</td>
         <td>{section.sectionDays}</td>
+        <td><button className="btn btn-blue" onClick={handleDetailsClick}>Details</button></td>
         <td>{sectionEditMode === true ? <button className="btn btn-blue btn-sm mr-2" onClick={handleEditClick}>Edit</button>
             : null}
             {sectionEditMode === true ? <button className="btn btn-red btn-sm" onClick={handleDeleteClick}>Delete</button>

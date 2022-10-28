@@ -139,7 +139,10 @@ public class TrailSectionJdbcTemplateRepository implements TrailSectionRepositor
     }
 
     @Override
+    @Transactional
     public boolean deleteById(int id) {
+        final String alertSql = "delete from section_alert where trail_section_id =?;";
+        template.update(alertSql,id);
         final String sql = "delete from trail_section where trail_section_id = ?;";
         int rowsAffected = template.update(sql, id);
         return rowsAffected > 0;

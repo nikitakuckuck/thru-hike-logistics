@@ -13,13 +13,11 @@ public class SectionAlertMapper implements RowMapper<SectionAlert> {
         sectionAlert.setAlertId(rs.getInt("alert_id"));
         sectionAlert.setAppUserId(rs.getInt("app_user_id"));
         sectionAlert.setAlertContent(rs.getString("alert_content"));
+        sectionAlert.setTrailSectionId(rs.getInt("trail_section_id"));
         sectionAlert.setFutureSections(rs.getBoolean("future_sections"));
 
         AlertCategoryMapper alertMapper = new AlertCategoryMapper();
         sectionAlert.setAlertCategory(alertMapper.mapRow(rs, rowNum));
-
-        TrailSectionMapper sectionMapper = new TrailSectionMapper();
-        sectionAlert.setTrailSection(sectionMapper.mapRow(rs, rowNum));
 
         return sectionAlert;
     }

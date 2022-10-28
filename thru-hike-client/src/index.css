@@ -8,6 +8,19 @@ h2 {
     padding-bottom: 15px;
 }
 
+.alert-red {
+    background-color: #e2aea0;
+    border-color: #914330
+}
+
+
+/* for use on the sections display table: */
+.active {
+    background-color: rgb(192, 204, 192);
+}
+
+
+/* button styling: */
 .btn-green {
     color: white;
     background-color: #6c8863;
@@ -30,10 +43,6 @@ h2 {
     background-color: #914330
 }
 
-.alert-red {
-    background-color: #e2aea0;
-    border-color: #914330
-}
 .btn-blue {
     color: white;
     background-color: #616e85;
@@ -60,6 +69,3 @@ h2 {
     text-align: left;
 }
 
-.active {
-    background-color: rgb(192, 204, 192);
-}

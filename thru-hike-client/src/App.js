@@ -9,6 +9,8 @@ import TrailForm from './components/TrailForm';
 import TrailSectionDeleteConfirmation from "./components/TrailSectionDeleteConfirmation";
 import TrailSectionDisplay from './components/TrailSectionDisplay';
 import TrailSectionForm from "./components/TrailSectionForm";
+import SectionDetails from "./components/SectionDetails";
+import SectionAlertForm from "./components/SectionAlertForm";
 
 function App() {
   return (
@@ -63,6 +65,12 @@ function App() {
           </Route>
           <Route path="/exit-checklist">
             <TownExitDisplay/>
+          </Route>
+          <Route path="/sections/details/:sectionDetailsId">
+            <SectionDetails/>
+          </Route>
+          <Route path={"/sections/add-alert/:sectionId"}>
+            <SectionAlertForm/>
           </Route>
         </Switch>
       </Router>
