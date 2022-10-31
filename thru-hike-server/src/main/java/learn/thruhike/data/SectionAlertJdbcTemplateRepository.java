@@ -25,12 +25,8 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
     @Override
     public List<SectionAlert> findAll(){
         final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, a.future_sections, " +
-//                "s.app_user_id, s.trail_id, s.section_start, s.section_end, s.latitude, s.longitude, s.section_length, s.section_days, s.upcoming, s.active , " +
-//                "t.trail_name, t.trail_abbreviation," +
                 "c.alert_category_name " +
                 "from section_alert a " +
-//                "join trail_section s on a.trail_section_id = s.trail_section_id " +
-//                "join trail t on s.trail_id = t.trail_id " +
                 "join alert_category c on a.alert_category_id = c.alert_category_id " +
                 "order by a.alert_category_id ;";
         return template.query(sql, new SectionAlertMapper());
@@ -73,22 +69,22 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
             preparedStatement.setString(2, sectionAlert.getAlertContent());
             preparedStatement.setInt(3,sectionAlert.getTrailSectionId());
             preparedStatement.setBoolean(4,sectionAlert.isFutureSections());
-            preparedStatement.setInt(5,sectionAlert.getAlertCategory().getAlertCategoryId());
+            preparedStatement.setInt(5,sectionAlert.getAlertCategoryId());
             return preparedStatement;
         },keyHolder);
         if(rowsAffected<=0){
             return null;
         }
-
+        setCategory(sectionAlert);
         sectionAlert.setAlertId(keyHolder.getKey().intValue());
         return sectionAlert;
     }
 
-
-    //necessary? remove if not
-    private AlertCategory setCategory(int categoryId){
+    //add alert category to the section alert
+    private void setCategory(SectionAlert alert){
         final String sql = "select alert_category_id, alert_category_name from alert_category where alert_category_id = ?;";
-        return template.queryForObject(sql,new AlertCategoryMapper(), categoryId);
+        AlertCategory category = template.queryForObject(sql,new AlertCategoryMapper(), alert.getAlertCategoryId());
+        alert.setAlertCategory(category);
     }
 
 }

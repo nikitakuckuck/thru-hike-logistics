@@ -3,6 +3,7 @@ package learn.thruhike.models;
 public class SectionAlert {
     private int alertId;
     private int appUserId;
+    private int alertCategoryId;
     private AlertCategory alertCategory;
     private String alertContent;
     private int trailSectionId;
@@ -22,6 +23,14 @@ public class SectionAlert {
 
     public void setAppUserId(int appUserId) {
         this.appUserId = appUserId;
+    }
+
+    public int getAlertCategoryId() {
+        return alertCategoryId;
+    }
+
+    public void setAlertCategoryId(int alertCategoryId) {
+        this.alertCategoryId = alertCategoryId;
     }
 
     public AlertCategory getAlertCategory() {

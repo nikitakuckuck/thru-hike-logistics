@@ -52,12 +52,9 @@ class SectionAlertJdbcTemplateRepositoryTest {
     }
 
     private SectionAlert makeSection(){
-        AlertCategory category = new AlertCategory();
-        category.setAlertCategoryId(1);
-        category.setAlertCategoryName("OTHER");
         SectionAlert alert = new SectionAlert();
         alert.setAppUserId(1);
-        alert.setAlertCategory(category);
+        alert.setAlertCategoryId(1);
         alert.setTrailSectionId(2);
         alert.setAlertContent("Trail Closed");
         alert.setFutureSections(false);

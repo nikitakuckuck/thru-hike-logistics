@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Error from "./Error";
 
 const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true, trail: {trailName: ""}};
-const DEFAULT_ALERT = {alertId: 0, alertContent: "", trailSectionId:0, futureSections:false, alertCategory: {alertCategoryId: 0,alertCategoryName: "" }};
+const DEFAULT_ALERT = {alertId: 0, alertContent: "", trailSectionId:0, futureSections:false, alertCategoryId: 0};
 
 function SectionAlertForm (){
 
@@ -40,6 +40,7 @@ function SectionAlertForm (){
 
     const saveAlert = ()=>{
         alert.trailSectionId=sectionId;
+        console.log(alert);
         const init = {
             method: 'POST',
             headers: {
@@ -91,13 +92,17 @@ function SectionAlertForm (){
     {errors.length >0 ? <Error errors={errors}/> : null}
     <form onSubmit={onSubmit}>
         <div className="form-group">
-            <label htmlFor="alertCategory">Category</label>
+            <label htmlFor="alertCategoryId">Category</label>
 
-            {/* not going to work: refactor this */}
-            <select name="alertCategory" className="form-control" id="alertCategory" value={alert.alertCategory} onChange={handleChange}>
+            <select name="alertCategoryId" className="form-control" id="alertCategoryId" value={alert.alertCategoryId} onChange={handleChange}>
                 <option>Please select a category:</option>
-                <option data-value={{"alertCategoryId": 1, "alertCategoryName": "OTHER"}}>Other</option>
-                <option data-value={{alertCategoryId: 2, alertCategoryName: "CLOSURE"}}>Closure</option>
+                <option value={7}>CALENDAR </option>
+                <option value={2}>CLOSURE</option>
+                <option value={5}>FIRE</option>
+                <option value={8}>GEAR</option>
+                <option value={3}>WATER</option>
+                <option value={4}>WEATHER</option>
+                <option value={1}>OTHER</option>
             </select>
         </div>
         <div className="form-group">

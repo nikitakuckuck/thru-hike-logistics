@@ -66,10 +66,10 @@ function App() {
           <Route path="/exit-checklist">
             <TownExitDisplay/>
           </Route>
-          <Route path="/sections/details/:sectionDetailsId">
+          <Route exact path="/sections/details/:sectionDetailsId">
             <SectionDetails/>
           </Route>
-          <Route path={"/sections/add-alert/:sectionId"}>
+          <Route exact path={"/sections/add-alert/:sectionId"}>
             <SectionAlertForm/>
           </Route>
         </Switch>

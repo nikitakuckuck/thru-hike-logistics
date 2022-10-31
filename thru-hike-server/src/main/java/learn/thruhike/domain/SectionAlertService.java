@@ -57,13 +57,14 @@ public class SectionAlertService {
         if(!sectionExists){
             result.addErrorMessage("Trail section does not exist.");
         }
+        if(alert.getAlertCategoryId()<=0 || alert.getAlertCategoryId()>8){
+            result.addErrorMessage("Alert category is required, and must be one of the specified options.");
+        }
 
         if(alert.getAlertContent()==null || alert.getAlertContent().isBlank()){
             result.addErrorMessage("Alert content is required.");
         }
-        if(alert.getAlertCategory()==null){
-            result.addErrorMessage("Alert category is required.");
-        }
+
         return result;
     }
 

@@ -46,7 +46,7 @@ function ExitItemDisplay (){
             setProgress(Math.round(((items.length - incomplete.length)/items.length)*100));
         })
         .catch(err=>console.log("Error: ", err));
-    })
+    },[])
     
     const handleChange = evt =>{
         const property = evt.target.name;

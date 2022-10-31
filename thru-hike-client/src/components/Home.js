@@ -8,9 +8,13 @@ function Home (){
     const [activeSection, setActiveSection] = useState(DEFAULT_SECTION);
     const history = useHistory();
 
+
     const [incomplete, setIncomplete]= useState([]);
     const [alerts, setAlerts] = useState([]);
 
+
+
+    
     useEffect(()=>{
         fetch(`http://localhost:8080/api/alerts/section/${activeSection.trailSectionId}`)
         .then(resp =>{
@@ -45,9 +49,10 @@ function Home (){
                     setActiveSection(body);
                 }
             })
-            .catch(err=>console.log("Error: ", err));
-        }
-    );
+            .catch(err=>console.log("Error: ", err))
+        },[history]
+
+    )
 
 
 
@@ -64,7 +69,7 @@ function Home (){
             setIncomplete(data);
         })
         .catch(err=>console.log("Error: ", err));
-    })
+    },[])
 
 
 
