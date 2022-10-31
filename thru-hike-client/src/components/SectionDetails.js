@@ -52,7 +52,8 @@ function SectionDetails (){
     },[sectionDetailsId])
 
     const handleAddAlert = ()=>{history.push(`/sections/add-alert/${sectionDetailsId}`)}
-
+    const handleBackToSections = ()=>{history.push("/sections")}
+    
     return(<>
     <h2>Section Details: </h2>
     <h3>{section.sectionStart} - {section.sectionEnd}</h3>
@@ -71,6 +72,7 @@ function SectionDetails (){
         }
         <button className="btn btn-green" onClick={handleAddAlert}>Add an alert for this section</button>
       </div>
+      <button className="btn btn-blue mt-3" onClick={handleBackToSections}>Back to all sections</button>
 
     </>)
 }

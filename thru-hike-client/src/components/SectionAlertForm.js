@@ -40,7 +40,6 @@ function SectionAlertForm (){
 
     const saveAlert = ()=>{
         alert.trailSectionId=sectionId;
-        console.log(alert);
         const init = {
             method: 'POST',
             headers: {
@@ -84,8 +83,7 @@ function SectionAlertForm (){
         setAlert(newAlert);
     }
 
-    //TODO: FIX
-    const handleCancel = ()=>history.push(`sections/details/${sectionId}`)
+    const handleCancel = ()=>history.push("/sections/details/"+sectionId);
 
     return(<>
     <h2>Add an Alert for: {section.sectionStart}-{section.sectionEnd}</h2>

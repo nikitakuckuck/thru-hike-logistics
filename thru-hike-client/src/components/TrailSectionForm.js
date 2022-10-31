@@ -79,7 +79,7 @@ const {editSectionId} = useParams();
             }
         })
         .catch(err=>console.log("Error: ", err));
-    })
+    },[])
 
     const updateSection = ()=>{
         const init = {

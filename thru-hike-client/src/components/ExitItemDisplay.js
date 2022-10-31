@@ -7,14 +7,8 @@ const DEFAULT_ITEM = {exitItemId: 0, exitItemName: "", isGoodToGo: false};
 function ExitItemDisplay (){
     const history = useHistory();
     const [newItem, setNewItem] = useState(DEFAULT_ITEM);
-    const [items, setItems]= useState([]);
+    let [items, setItems]= useState([]);
 
-    const [incomplete, setIncomplete]= useState([]);
-    const [progress, setProgress] = useState(0);
-
-    //switched to using State for progress so progress bar would have a default of 0
-    // let progress = Math.round(((items.length - incomplete.length)/items.length)*100);
-    
 
 
     useEffect(()=>{
@@ -30,23 +24,7 @@ function ExitItemDisplay (){
             setItems(data);
         })
         .catch(err=>console.log("Error: ", err));
-    },[])
-
-    useEffect(()=>{
-        fetch(`http://localhost:8080/api/exit-items/incomplete`)
-        .then(resp =>{
-            switch(resp.status){
-                case 200:
-                    return resp.json();
-                default: Promise.reject("Something has gone wrong.");
-            }
-        })
-        .then(data=>{
-            setIncomplete(data);
-            setProgress(Math.round(((items.length - incomplete.length)/items.length)*100));
-        })
-        .catch(err=>console.log("Error: ", err));
-    },[])
+    },[newItem])
     
     const handleChange = evt =>{
         const property = evt.target.name;
@@ -68,7 +46,7 @@ function ExitItemDisplay (){
         .then(resp =>{
             switch (resp.status){
                 case 201:
-                    window.location.reload();
+                    // window.location.reload();
                     break;
                 case 400:
                     return resp.json();
@@ -78,7 +56,7 @@ function ExitItemDisplay (){
         })
         .then(body =>{
             if(body.exitItemId){
-                
+                return null;
             }else if(body){
                 //TODO: set Errors
             }
@@ -134,13 +112,7 @@ function ExitItemDisplay (){
             Add New Item
         </button>
         <button onClick={handleBackToSummary} className = "btn btn-blue mr-2 mb-3">Back To Section Summary</button>
-        <button onClick ={handleResetClick} className="btn btn-grey  mb-3">Reset List</button>
-        {/* progress bar for checklist progress */}
-        {items.length ===0? <p>Add an item to start creating your town exit checklist! Include anything you want to check off every time you leave a town, for example, 'Charge electronics', or 'Fill up water bottles'.</p> :
-        <div className="progress mb-2">
-            <div className="progress-bar" role="progressbar" style={{width: `${progress}%`}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100">{progress}%</div>
-        </div>
-        }
+        <button onClick ={handleResetClick} className="btn btn-grey  mb-3">Reset All Items to Incomplete</button>
 
         <table className="table table-hover">
             <thead>
