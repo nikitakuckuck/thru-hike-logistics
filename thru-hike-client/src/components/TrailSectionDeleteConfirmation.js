@@ -57,7 +57,7 @@ function TrailSectionDeleteConfirmation(){
         <p>{section.sectionStart} - {section.sectionEnd}, {section.trail.trailName}</p>
         <p>{section.sectionLength} miles, {section.sectionDays} days</p>
     </div>
-    <p>Are you sure you want to delete this section? This action will <strong> also delete all notes, resupply lists, etc. that are associated with this section.</strong></p>
+    <p>Are you sure you want to delete this section? This action will <strong> also delete all notes, alerts, resupply lists, etc. that are associated with this section.</strong></p>
     <div>
         <button type="button" className="btn btn-red mr-2" onClick={handleConfirmDelete}>Delete this section and all its associated data</button>
         <button type="button" className="btn btn-blue" onClick={handleCancelDelete}>Do Not Delete</button>

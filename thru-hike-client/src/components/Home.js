@@ -100,7 +100,7 @@ function Home (){
     <div className="alert alert-red" role="alert">
         <p>Alerts:</p>
         <ul>
-              {alerts.map(alert =><SectionAlert key={alert.sectionAlertId} alert = {alert}/>)}
+              {alerts.map(alert =><SectionAlert key ={alert.sectionAlertId} alert = {alert}/>)}
               {arrivalDate.getDay() === 6 || arrivalDate.getDay()===0 || arrivalDate.getDay()===5 ?<li>WEEKEND: if you leave {arrivalDateWarning(arrivalDate.getDay())}, you are scheduled to arrive in the next town on a weekend. </li>: null}
         </ul>
 

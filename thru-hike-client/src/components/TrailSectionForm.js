@@ -133,6 +133,7 @@ const {editSectionId} = useParams();
 
     return(<>
     <h2>{editSectionId ? "Edit" : "Add"} a Section:</h2>
+    <p className="mb-4">If you do not see the trail you want in the trail dropdown, <a href="/trails/add">add the trail</a> first.</p>
     {errors.length >0 ? <Error errors = {errors}/> : null}
     <form onSubmit={onSubmit}>
         <div className="form-group">

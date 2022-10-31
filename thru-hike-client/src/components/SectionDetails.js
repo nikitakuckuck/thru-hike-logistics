@@ -66,7 +66,7 @@ function SectionDetails (){
         <p>Section alerts: {alerts.length===0? "No alerts" : null}</p>
         {alerts.length===0? null :   
         <ul>
-              {alerts.map(alert =><SectionAlert key={alert.sectionAlertId} alert = {alert}/>)}
+              {alerts.map(alert =><SectionAlert key = {alert.sectionAlertId} alert = {alert}/>)}
         </ul>
         
         }
