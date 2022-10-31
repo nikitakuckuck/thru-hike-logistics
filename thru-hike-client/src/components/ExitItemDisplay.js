@@ -46,7 +46,7 @@ function ExitItemDisplay (){
         .then(resp =>{
             switch (resp.status){
                 case 201:
-                    // window.location.reload();
+                    window.location.reload();
                     break;
                 case 400:
                     return resp.json();
@@ -113,7 +113,7 @@ function ExitItemDisplay (){
         </button>
         <button onClick={handleBackToSummary} className = "btn btn-blue mr-2 mb-3">Back To Section Summary</button>
         <button onClick ={handleResetClick} className="btn btn-grey  mb-3">Reset All Items to Incomplete</button>
-
+    
         <table className="table table-hover">
             <thead>
             </thead>

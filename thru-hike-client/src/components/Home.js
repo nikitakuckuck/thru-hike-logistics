@@ -7,6 +7,24 @@ const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectio
 function Home (){
     const [activeSection, setActiveSection] = useState(DEFAULT_SECTION);
     const history = useHistory();
+    let arrivalDate = new Date(Date.now());
+    //arrival date counts the current day
+    arrivalDate.setDate(arrivalDate.getDate() + activeSection.sectionDays-1);
+
+    //arrival day 
+    function arrivalDateWarning (dayofWeek) {
+        switch(dayofWeek){
+            case 6:
+                return "today or tomorrow";
+            case 0:
+                return "today";
+            case 5:
+                return "tomorrow"
+            default:
+                return "error";
+        }
+
+    }
 
 
     const [incomplete, setIncomplete]= useState([]);
@@ -83,7 +101,10 @@ function Home (){
         <p>Alerts:</p>
         <ul>
               {alerts.map(alert =><SectionAlert key={alert.sectionAlertId} alert = {alert}/>)}
+              {arrivalDate.getDay() === 6 || arrivalDate.getDay()===0 || arrivalDate.getDay()===5 ?<li>WEEKEND: if you leave {arrivalDateWarning(arrivalDate.getDay())}, you are scheduled to arrive in the next town on a weekend. </li>: null}
         </ul>
+
+
       </div>
     {/* TODO: possibly add logic so the button is only visible when the checklist has at least one item? */}
     <button className={incomplete.length===0 ? "btn btn-green mb-3" : "btn btn-red mb-3"} onClick={handleExitChecklistClick}><strong>{incomplete.length===0 ? "Completed" : "Not Completed"}</strong>: Town Exit Checklist </button>
