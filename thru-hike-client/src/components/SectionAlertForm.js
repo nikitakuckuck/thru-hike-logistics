@@ -59,7 +59,7 @@ function SectionAlertForm (){
         })
         .then(body=>{
             if(body.alertId){
-                //TODO routing
+                history.push("/sections/details/"+sectionId);
             } else if(body){
                 setErrors(body);
             }

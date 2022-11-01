@@ -4,6 +4,7 @@ import SectionAlert from "./SectionAlert";
 
 const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true, trail: {trailName: ""}};
 
+
 function SectionDetails (){
     const {sectionDetailsId}= useParams();
     const [section, setSection] = useState(DEFAULT_SECTION);
@@ -66,7 +67,7 @@ function SectionDetails (){
         <p>Section alerts: {alerts.length===0? "No alerts" : null}</p>
         {alerts.length===0? null :   
         <ul>
-              {alerts.map(alert =><SectionAlert key = {alert.sectionAlertId} alert = {alert}/>)}
+              {alerts.map(alert =><SectionAlert key={alert.alertId} alert = {alert}/>)}
         </ul>
         
         }
