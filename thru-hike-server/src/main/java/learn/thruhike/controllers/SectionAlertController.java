@@ -37,7 +37,7 @@ public class SectionAlertController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable int id){
+    public ResponseEntity<?> deleteById(@PathVariable int id){
         Result<SectionAlert> result = service.deleteById(id);
         if(!result.isSuccess()){
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);

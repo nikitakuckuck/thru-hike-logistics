@@ -99,10 +99,13 @@ function Home (){
     <p className="mt-10">Section can be switched by setting a different section as active on <a href ="/sections">Sections</a>.</p>
     <div className="alert alert-red" role="alert">
         <p>Alerts:</p>
-        <ul>
-              {alerts.map(alert =><SectionAlert key ={alert.alertId} alert = {alert}/>)}
-              {arrivalDate.getDay() === 6 || arrivalDate.getDay()===0 || arrivalDate.getDay()===5 ?<li>WEEKEND: if you leave {arrivalDateWarning(arrivalDate.getDay())}, you are scheduled to arrive in the next town on a weekend. <button className="btn btn-link btn-small" data-toggle="modal" data-target="#arrivalInfo"><small>How is arrival day calculated?</small></button></li>: null}
-        </ul>
+        <table>
+            <tbody>
+            {alerts.map(alert =><SectionAlert key ={alert.alertId} alert = {alert}/>)}
+              {arrivalDate.getDay() === 6 || arrivalDate.getDay()===0 || arrivalDate.getDay()===5 ?<tr><td>- WEEKEND: if you leave {arrivalDateWarning(arrivalDate.getDay())}, you are scheduled to arrive in the next town on a weekend. <button className="btn btn-link btn-small" data-toggle="modal" data-target="#arrivalInfo"><small>How is arrival day calculated?</small></button></td></tr>: null}
+            </tbody>
+              
+        </table>
 
 
       </div>

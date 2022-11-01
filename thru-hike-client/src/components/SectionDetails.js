@@ -10,6 +10,7 @@ function SectionDetails (){
     const [section, setSection] = useState(DEFAULT_SECTION);
     const [alerts, setAlerts] = useState([]);
     const history = useHistory();
+    const [alertDeleteMode, setAlertDeleteMode] = useState(false);
 
     useEffect(()=>{
         if(sectionDetailsId){
@@ -54,6 +55,14 @@ function SectionDetails (){
 
     const handleAddAlert = ()=>{history.push(`/sections/add-alert/${sectionDetailsId}`)}
     const handleBackToSections = ()=>{history.push("/sections")}
+
+    const handleDeleteModeClick = ()=>{
+        if(alertDeleteMode === true){
+            setAlertDeleteMode(false);
+        } else {
+            setAlertDeleteMode(true);
+        }
+    }
     
     return(<>
     <h2>Section Details: </h2>
@@ -66,12 +75,20 @@ function SectionDetails (){
     <div >
         <p>Section alerts: {alerts.length===0? "No alerts" : null}</p>
         {alerts.length===0? null :   
-        <ul>
-              {alerts.map(alert =><SectionAlert key={alert.alertId} alert = {alert}/>)}
-        </ul>
+        <table>
+            <thead>
+                <tr></tr>
+                <tr></tr>
+            </thead>
+            <tbody>
+                {alerts.map(alert =><SectionAlert key={alert.alertId} alert = {alert} alertDeleteMode= {alertDeleteMode}/>)}
+            </tbody>
+              
+        </table>
         
         }
-        <button className="btn btn-green" onClick={handleAddAlert}>Add an alert for this section</button>
+        <button className="btn btn-green mt-3" onClick={handleAddAlert}>Add an alert for this section</button>
+        <button className="btn btn-red ml-2 mt-3" onClick={handleDeleteModeClick}>{alertDeleteMode === false ? "Delete an Alert" : "Exit Alert Delete Mode"}</button>
       </div>
       <button className="btn btn-blue mt-3" onClick={handleBackToSections}>Back to all sections</button>
 
