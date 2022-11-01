@@ -38,6 +38,14 @@ public class SectionAlertService {
         return result;
     }
 
+    public Result<SectionAlert> deleteById(int id){
+        Result<SectionAlert> result = new Result<>();
+        if(!alertRepository.deleteById(id)){
+            result.addErrorMessage(messageWithId(id));
+        }
+        return result;
+    }
+
     private Result<SectionAlert> validateAlert(SectionAlert alert){
         Result<SectionAlert> result = new Result<>();
         if(alert==null){
@@ -57,6 +65,8 @@ public class SectionAlertService {
         if(!sectionExists){
             result.addErrorMessage("Trail section does not exist.");
         }
+
+        //eight options are part of the sql database table for alert categories, so selection is limited to those eight.
         if(alert.getAlertCategoryId()<=0 || alert.getAlertCategoryId()>8){
             result.addErrorMessage("Alert category is required, and must be one of the specified options.");
         }

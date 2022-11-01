@@ -24,7 +24,7 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
 
     @Override
     public List<SectionAlert> findAll(){
-        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, a.future_sections, " +
+        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, " +
                 "c.alert_category_name " +
                 "from section_alert a " +
                 "join alert_category c on a.alert_category_id = c.alert_category_id " +
@@ -34,7 +34,7 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
 
     @Override
     public List<SectionAlert> findByTrailSectionId(int id){
-        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, a.future_sections, " +
+        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, " +
                 "c.alert_category_name " +
                 "from section_alert a " +
                 "join alert_category c on a.alert_category_id = c.alert_category_id " +
@@ -44,7 +44,7 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
 
     @Override
     public SectionAlert findById(int id){
-        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, a.future_sections, " +
+        final String sql = "select a.alert_id, a.app_user_id, a.alert_category_id, a.alert_content, a.trail_section_id, " +
                 "c.alert_category_name " +
                 "from section_alert a " +
                 "join alert_category c on a.alert_category_id = c.alert_category_id " +
@@ -59,8 +59,8 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
     @Override
     public SectionAlert add(SectionAlert sectionAlert){
         final String sql = "insert into section_alert " +
-                "(app_user_id, alert_content, trail_section_id, future_sections, alert_category_id) " +
-                "values (?,?,?,?,?); ";
+                "(app_user_id, alert_content, trail_section_id, alert_category_id) " +
+                "values (?,?,?,?); ";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = template.update(con -> {
@@ -68,8 +68,7 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
             preparedStatement.setInt(1,sectionAlert.getAppUserId());
             preparedStatement.setString(2, sectionAlert.getAlertContent());
             preparedStatement.setInt(3,sectionAlert.getTrailSectionId());
-            preparedStatement.setBoolean(4,sectionAlert.isFutureSections());
-            preparedStatement.setInt(5,sectionAlert.getAlertCategoryId());
+            preparedStatement.setInt(4,sectionAlert.getAlertCategoryId());
             return preparedStatement;
         },keyHolder);
         if(rowsAffected<=0){
@@ -78,6 +77,12 @@ public class SectionAlertJdbcTemplateRepository implements SectionAlertRepositor
         setCategory(sectionAlert);
         sectionAlert.setAlertId(keyHolder.getKey().intValue());
         return sectionAlert;
+    }
+    @Override
+    public boolean deleteById(int id){
+        final String sql = "delete from section_alert where alert_id = ?;";
+        int rowsAffected = template.update(sql, id);
+        return rowsAffected > 0;
     }
 
     //add alert category to the section alert

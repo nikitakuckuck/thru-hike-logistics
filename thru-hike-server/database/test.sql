@@ -97,7 +97,6 @@ app_user_id int,
 alert_category_id int not null,
 alert_content varchar(1000) not null,
 trail_section_id int not null,
-future_sections bit not null,
 constraint fk_section_alert_trail_section_id
 	foreign key (trail_section_id)
     references trail_section(trail_section_id),
@@ -228,13 +227,13 @@ values
 (3,1,'call the fam',0),
 (4,1,'download episodes',0);
 
-insert into section_alert (alert_id, app_user_id, alert_category_id, alert_content, trail_section_id, future_sections)
+insert into section_alert (alert_id, app_user_id, alert_category_id, alert_content, trail_section_id)
 values
-(1,1,1,'Test Alert',1,0),
-(2,1,8,'Pick up bear can',2,0),
-(3,1,2,'Trail closed',2,1),
-(4,1,2,'Bridge out and trail closed',2,0),
-(5,1,2,'Trail closed for trail work',2,0);
+(1,1,1,'Test Alert',1),
+(2,1,8,'Pick up bear can',2),
+(3,1,2,'Trail closed',2),
+(4,1,2,'Bridge out and trail closed',2),
+(5,1,2,'Trail closed for trail work',2);
 
 end //
 delimiter ;

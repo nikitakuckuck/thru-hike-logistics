@@ -7,7 +7,6 @@ public class SectionAlert {
     private AlertCategory alertCategory;
     private String alertContent;
     private int trailSectionId;
-    private boolean futureSections;
 
     public int getAlertId() {
         return alertId;
@@ -57,11 +56,4 @@ public class SectionAlert {
         this.trailSectionId = trailSectionId;
     }
 
-    public boolean isFutureSections() {
-        return futureSections;
-    }
-
-    public void setFutureSections(boolean futureSections) {
-        this.futureSections = futureSections;
-    }
 }

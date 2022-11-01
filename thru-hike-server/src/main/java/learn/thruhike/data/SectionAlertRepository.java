@@ -12,4 +12,6 @@ public interface SectionAlertRepository {
     SectionAlert findById(int id);
 
     SectionAlert add(SectionAlert sectionAlert);
+
+    boolean deleteById(int id);
 }

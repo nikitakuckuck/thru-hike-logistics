@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Error from "./Error";
 
-const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true, trail: {trailName: ""}};
-const DEFAULT_ALERT = {alertId: 0, alertContent: "", trailSectionId:0, futureSections:false, alertCategoryId: 0};
+const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, trail: {trailName: ""}};
+const DEFAULT_ALERT = {alertId: 0, alertContent: "", trailSectionId:0, alertCategoryId: 0};
 
 function SectionAlertForm (){
 

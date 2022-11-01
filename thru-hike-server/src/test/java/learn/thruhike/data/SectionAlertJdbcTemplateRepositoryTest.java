@@ -51,13 +51,22 @@ class SectionAlertJdbcTemplateRepositoryTest {
     assertEquals("OTHER", alert.getAlertCategory().getAlertCategoryName());
     }
 
+    @Test
+    void shouldDeleteAlert(){
+        assertTrue(repository.deleteById(2));
+    }
+
+    @Test
+    void shouldNotDeleteInvalidAlert(){
+        assertFalse(repository.deleteById(92));
+    }
+
     private SectionAlert makeSection(){
         SectionAlert alert = new SectionAlert();
         alert.setAppUserId(1);
         alert.setAlertCategoryId(1);
         alert.setTrailSectionId(2);
         alert.setAlertContent("Trail Closed");
-        alert.setFutureSections(false);
         return alert;
     }
 

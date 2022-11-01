@@ -97,7 +97,6 @@ app_user_id int,
 alert_category_id int not null,
 alert_content varchar(1000) not null,
 trail_section_id int not null,
-future_sections bit not null,
 constraint fk_section_alert_trail_section_id
 	foreign key (trail_section_id)
     references trail_section(trail_section_id),
