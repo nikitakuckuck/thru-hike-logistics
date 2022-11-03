@@ -1,6 +1,5 @@
 package learn.thruhike.data.mappers;
 
-import learn.thruhike.models.Trail;
 import learn.thruhike.models.TrailSection;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -16,8 +15,10 @@ public class TrailSectionMapper implements RowMapper<TrailSection> {
         section.setTrailId(rs.getInt("trail_id"));
         section.setSectionStart(rs.getString("section_start"));
         section.setSectionEnd(rs.getString("section_end"));
-        section.setLatitude(rs.getDouble("latitude"));
-        section.setLongitude(rs.getDouble("longitude"));
+        section.setStartLatitude(rs.getDouble("start_latitude"));
+        section.setStartLongitude(rs.getDouble("start_longitude"));
+        section.setEndLatitude(rs.getDouble("end_latitude"));
+        section.setEndLongitude(rs.getDouble("end_longitude"));
         section.setSectionLength(rs.getInt("section_length"));
         section.setSectionDays(rs.getInt("section_days"));
         section.setUpcoming(rs.getBoolean("upcoming"));

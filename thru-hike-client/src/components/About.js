@@ -14,14 +14,14 @@ function About(){
             <li>
                 <strong>Town Exit Checklist</strong>: for peace of mind that you've finished all your to-dos before you hit the trail again.
             </li>
+            <li>
+                <strong>Area alerts</strong>: add links to fire alerts, trail closures, water reports, etc.
+            </li>
         </ul>
     <h3 className="pt-3">Future Features:</h3>
     <p>These features don't exist yet, but they're in the works!</p>
 
     <ul>
-        <li>
-            <strong>Area alerts</strong>: links to fire alerts, trail closures, water reports, etc.
-        </li>
         <li>
             <strong>Weather</strong>: displaying upcoming weather for both your current town and for your next town.
         </li>
@@ -35,10 +35,10 @@ function About(){
             <strong>To-Download</strong>: make sure you don't forget which e-books, apps, playlists, etc you want to download before you leave town.
         </li>
         <li>
-            <strong>Cool Town Things</strong>: a spot to dump all your research on trail towns, so when you finally arrive in that town, you won't forget to go check out their world-famous pie, or miss that cool art exhibit.
+            <strong>Town Highlights</strong>: a spot to dump all your research on trail towns, so when you finally arrive in that town, you won't forget to go check out their world-famous pie, or miss that cool art exhibit.
         </li>
         <li>
-            <strong>Cool Trail Things</strong>: a similar format as for town, but for the upcoming trail section. 
+            <strong>Trail Highlights</strong>: a similar format as for town, but for the upcoming trail section. 
         </li>
         <li>
             <strong>Town contacts</strong>: store any PO general delivery addresses, trail angel phone numbers, etc.
@@ -51,9 +51,6 @@ function About(){
         </li>
         <li>
             <strong>General notes</strong>: Create your own categories for notes, with the option to associate notes with a particular trail section so they'll show up on your section summary when you arrive to that section.
-        </li>
-        <li>
-            <strong>Murphy's Day reminders</strong>: basically, an "open in case of emergency" set of notes, in case Murphy's Law shows up in full force. It's a place to keep all the things you want to remind yourself before calling it quits on the whole trail: encouraging quotes, reminders to drink water, etc.
         </li>
 
     </ul>

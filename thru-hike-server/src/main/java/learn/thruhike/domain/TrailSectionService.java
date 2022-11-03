@@ -116,10 +116,16 @@ public class TrailSectionService {
             result.addErrorMessage("Number of days cannot be greater than 30. " +
                     "Please create a shorter section, go into town, and get some food so you don't starve.");
         }
-        if(section.getLongitude() <0 || section.getLongitude()>180){
-            result.addErrorMessage("Longitude must be between 0 and 180.");
+        if(section.getStartLongitude() <-180 || section.getStartLongitude()>180){
+            result.addErrorMessage("Longitude must be between -180 and 180.");
         }
-        if(section.getLatitude() <-90 || section.getLatitude()>90){
+        if(section.getStartLatitude() <-90 || section.getStartLatitude()>90){
+            result.addErrorMessage("Latitude must be between -90 and 90.");
+        }
+        if(section.getEndLongitude() <-180 || section.getEndLongitude()>180){
+            result.addErrorMessage("Longitude must be between -180 and 180.");
+        }
+        if(section.getEndLatitude() <-90 || section.getEndLatitude()>90){
             result.addErrorMessage("Latitude must be between -90 and 90.");
         }
         return result;

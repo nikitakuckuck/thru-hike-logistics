@@ -15,8 +15,10 @@ app_user_id int,
 trail_id int not null,
 section_start varchar(200) not null,
 section_end varchar(200) not null,
-latitude decimal(9,6) null,
-longitude decimal(9,6) null,
+start_latitude decimal(9,6) null,
+start_longitude decimal(9,6) null,
+end_latitude decimal(9,6) null,
+end_longitude decimal(9,6) null,
 section_length int not null,
 section_days int not null,
 upcoming bit not null,
@@ -105,27 +107,21 @@ constraint fk_section_alert_category_id
     references alert_category(alert_category_id)
 );
 
-create table cool_thing(
-cool_thing_id int primary key auto_increment,
+create table highlight(
+highlight_id int primary key auto_increment,
 app_user_id int,
-cool_thing_content varchar(1000) not null,
+highlight_content varchar(1000) not null,
 in_town bit not null,
 trail_id int not null,
 trail_section_id int,
-constraint fk_cool_thing_trail_section_id
+constraint fk_highlight_trail_section_id
 	foreign key (trail_section_id)
     references trail_section(trail_section_id),
-constraint fk_cool_thing_trail_id
+constraint fk_highlight_trail_id
 	foreign key (trail_id)
     references trail(trail_id)
 );
 
-create table murphys_day(
-reminder_id int primary key auto_increment,
-app_user_id int,
-reminder_name varchar(50) not null,
-reminder_content varchar(1000) null
-);
 
 create table calendar_item(
 calendar_item_id int primary key auto_increment,
@@ -142,25 +138,16 @@ exit_item_name varchar(50) not null,
 good_to_go bit not null
 );
 
-create table contact_category(
-contact_category_id int primary key auto_increment,
-app_user_id int,
-contact_category_name varchar(50) not null
-);
-
 create table town_contact(
 town_contact_id int primary key auto_increment,
 app_user_id int,
-contact_category_id int not null,
+contact_category varchar(200) not null,
 town_contact_content varchar(250) not null,
 town_contact_other_notes varchar(500) null,
 trail_section_id int not null,
 constraint fk_town_contact_trail_section_id
 	foreign key (trail_section_id)
-    references trail_section(trail_section_id),
-constraint fk_contact_category_id
-	foreign key (contact_category_id)
-    references contact_category(contact_category_id)
+    references trail_section(trail_section_id)
 );
 
 create table gear(
@@ -202,6 +189,8 @@ create procedure set_known_good_state()
 begin
 delete from section_alert;
 alter table section_alert auto_increment=1;
+delete from town_contact;
+alter table town_contact auto_increment=1;
 delete from trail_section;
 alter table trail_section auto_increment = 1;
 delete from trail;
@@ -214,11 +203,11 @@ values
 (1,1,'Pacific Crest Trail', 'PCT'),
 (2,1,'Continental Divide Trail', 'CDT');
 
-insert into trail_section (trail_section_id, app_user_id, trail_id, section_start, section_end, latitude, longitude, section_length, section_days, upcoming, active)
+insert into trail_section (trail_section_id, app_user_id, trail_id, section_start, section_end, start_latitude, start_longitude, end_latitude, end_longitude,section_length, section_days, upcoming, active)
 values
-(1,1,2,'Doc Campbells', 'Pie Town', null, null, 100, 5, 1,1),
-(2,1,1,'Canadian Border', 'Hart\'s Pass',70,-90, 30,3,0,0),
-(3,1,1,'Mexican Border', 'First Town', null, null, 80, 6, 1,0);
+(1,1,2,'Doc Campbells', 'Pie Town', null, null, null, null,100, 5, 1,1),
+(2,1,1,'Canadian Border', 'Hart\'s Pass',70,-90, null, null,30,3,0,0),
+(3,1,1,'Mexican Border', 'First Town', null, null, null, null,80, 6, 1,0);
 
 insert into exit_item (exit_item_id, app_user_id, exit_item_name, good_to_go)
 values
@@ -234,6 +223,12 @@ values
 (3,1,2,'Trail closed',2),
 (4,1,2,'Bridge out and trail closed',2),
 (5,1,2,'Trail closed for trail work',2);
+
+insert into town_contact (town_contact_id, app_user_id, contact_category, town_contact_content, town_contact_other_notes, trail_section_id)
+values
+(1,1,'Rides','123-456-7890', 'other hikers say to tip $10',2),
+(2,1,'PO general delivery address', 'General Delivery, town, WA, 12345', null,2),
+(3,1,'Rides','Bob TrailAngel call 123-321-1234', null, 1);
 
 end //
 delimiter ;

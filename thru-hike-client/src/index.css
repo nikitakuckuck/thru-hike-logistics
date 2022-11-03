@@ -69,3 +69,16 @@ h2 {
     text-align: left;
 }
 
+.leaflet-container { height: 30vh; 
+/* width: 100vh; */
+width: 100%
+}
+
+.circle-blue {
+    background-color: #94a8caa2;
+    border-radius: 100%;
+    width: 30vh;
+    height: 30vh;
+    text-align: center;
+}
+

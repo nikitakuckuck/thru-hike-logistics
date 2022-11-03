@@ -23,9 +23,6 @@ function TrailSectionDisplay (){
     }, [])
 
 
-
-
-
     function editModeClick(){
         if(sectionEditMode === true){
             setSectionEditMode(false);
@@ -43,8 +40,8 @@ function TrailSectionDisplay (){
     {sections.length===0 ? null :<button onClick={editModeClick} className="btn btn-sm btn-blue mb-3" >{sectionEditMode === false ? "Edit or Delete a Section" : "Exit Edit Mode"}</button>}
 
     {sections.length===0 ? <p>After you've <a href="/trails/add">added a trail</a>, just add a section here to get started. Happy hiking!</p>: 
-<table className="table table-hover">
-    <caption>List of Sections</caption>
+    <table className="table table-hover">
+        <caption>List of Sections</caption>
         <thead className="thead-dark">
             <tr>
                 <th></th>
@@ -62,10 +59,7 @@ function TrailSectionDisplay (){
             {sections.map(section =><TrailSection key={section.trailSectionId} section = {section} sectionEditMode = {sectionEditMode}/>)}
         </tbody>
     </table>
-
     }
-    
-    
     </>)
 }
 export default TrailSectionDisplay;

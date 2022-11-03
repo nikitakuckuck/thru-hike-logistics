@@ -8,7 +8,8 @@ function SectionAlert ({alert, alertDeleteMode}){
         .then(resp=>{
             switch (resp.status){
                 case 204:
-                    //reload page?
+                    //todo: consider a different option here
+                    window.location.reload();
                     break;
                 case 404:
                     //todo: decide what to do here.

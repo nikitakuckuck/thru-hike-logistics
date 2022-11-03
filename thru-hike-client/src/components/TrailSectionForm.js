@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Error from "./Error";
+import { MapContainer, TileLayer } from 'react-leaflet';
+import MapMarker from "./MapMarker";
 
-const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", latitude: 0, longitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true};
+
+
+const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", startLatitude: 0, startLongitude: 0, endLatitude: 0, endLongitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true};
 
 function TrailSectionForm (){
 const [trails, setTrails]=useState([]);
@@ -10,6 +14,14 @@ const [section, setSection]=useState(DEFAULT_SECTION);
 const history = useHistory();
 const [errors, setErrors] = useState([]);
 const {editSectionId} = useParams();
+
+let location = [37.0902, -95.7129];
+const [startPosition, setStartPosition] = useState(null);
+const [endPosition, setEndPosition] = useState(null);
+
+
+
+
 
     useEffect(()=>{
         if(editSectionId){
@@ -28,6 +40,8 @@ const {editSectionId} = useParams();
             .then(body =>{
                 if(body.trailSectionId){
                     setSection(body);
+                    setStartPosition([body.startLatitude, body.startLongitude]);
+                    setEndPosition([body.endLatitude, body.endLongitude]);
                 }
             })
             .catch(err=>console.log("Error: ", err));
@@ -35,12 +49,18 @@ const {editSectionId} = useParams();
     },[editSectionId]);
 
     const saveSection = ()=>{
+        const sectionWithCoordinates = {...section};
+        sectionWithCoordinates.startLatitude = startPosition.lat;
+        sectionWithCoordinates.startLongitude = startPosition.lng;
+        sectionWithCoordinates.endLatitude = endPosition.lat;
+        sectionWithCoordinates.endLongitude = endPosition.lng;
+
         const init = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({...section})
+            body: JSON.stringify(sectionWithCoordinates)
         };
         fetch('http://localhost:8080/api/sections', init)
         .then(resp =>{
@@ -82,6 +102,7 @@ const {editSectionId} = useParams();
     },[])
 
     const updateSection = ()=>{
+        //TODO: update coordinates??
         const init = {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -131,6 +152,8 @@ const {editSectionId} = useParams();
 
     const handleCancel = ()=>history.push('/sections');
 
+
+
     return(<>
     <h2>{editSectionId ? "Edit" : "Add"} a Section:</h2>
     <p className="mb-4">If you do not see the trail you want in the trail dropdown, <a href="/trails/add">add the trail</a> first.</p>
@@ -147,10 +170,34 @@ const {editSectionId} = useParams();
             <label htmlFor="sectionStart">Starting Town Name</label>
             <input name="sectionStart" type="text" className="form-control" id="sectionStart" value={section.sectionStart} onChange={handleChange}/>
         </div>
+
+        <div className="pb-3">
+            <label htmlFor="sectionStartMap">Click on the starting town to assign a location which will be used on the section summary to display weather forecasts, air quality alerts, etc.</label>
+            <MapContainer center={location} zoom={4} scrollWheelZoom={true}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <MapMarker position={startPosition} setPosition={setStartPosition}/>
+               
+            </MapContainer>
+        </div>
+
         <div className="form-group">
             <label htmlFor="sectionEnd">Ending Town Name</label>
             <input name="sectionEnd" type="text" className="form-control" id="sectionEnd" value={section.sectionEnd} onChange={handleChange}/>
         </div>
+        <div className="pb-3">
+            <label htmlFor="sectionEndMap">Click on the ending town to assign a location which will be used on the section summary to display weather forecasts, air quality alerts, etc.</label>
+            <MapContainer center={location} zoom={4} scrollWheelZoom={true}>
+                <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+               <MapMarker position={endPosition} setPosition={setEndPosition}/>
+            </MapContainer>
+        </div>
+
         <div className="form-group">
             <label htmlFor="sectionDays">Total Days</label>
             <input name="sectionDays" type="number" className="form-control" id="sectionDays" value={section.sectionDays} onChange={handleChange}/>
@@ -167,8 +214,8 @@ const {editSectionId} = useParams();
             <button type="submit" className="btn btn-green mr-2">Submit</button>
             <button type="button" className="btn btn-blue" onClick={handleCancel}>Cancel</button>
         </div>
-
     </form>
+
     </>)
 }
 export default TrailSectionForm;

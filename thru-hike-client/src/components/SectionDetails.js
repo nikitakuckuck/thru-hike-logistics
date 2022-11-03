@@ -69,6 +69,7 @@ function SectionDetails (){
     <h3>{section.sectionStart} - {section.sectionEnd}</h3>
     <div>
         <p>Length: {section.sectionLength} miles, {section.sectionDays} days</p>
+        
 
         
     </div>

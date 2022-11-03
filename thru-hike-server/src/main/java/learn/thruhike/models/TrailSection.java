@@ -8,8 +8,10 @@ public class TrailSection {
     private Trail trail;
     private String sectionStart;
     private String sectionEnd;
-    private double latitude;
-    private double longitude;
+    private double startLatitude;
+    private double startLongitude;
+    private double endLatitude;
+    private double endLongitude;
     private int sectionLength;
     private int sectionDays;
     private boolean upcoming;
@@ -63,20 +65,36 @@ public class TrailSection {
         this.sectionEnd = sectionEnd;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getStartLatitude() {
+        return startLatitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setStartLatitude(double startLatitude) {
+        this.startLatitude = startLatitude;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getStartLongitude() {
+        return startLongitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setStartLongitude(double startLongitude) {
+        this.startLongitude = startLongitude;
+    }
+
+    public double getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(double endLatitude) {
+        this.endLatitude = endLatitude;
+    }
+
+    public double getEndLongitude() {
+        return endLongitude;
+    }
+
+    public void setEndLongitude(double endLongitude) {
+        this.endLongitude = endLongitude;
     }
 
     public int getSectionLength() {

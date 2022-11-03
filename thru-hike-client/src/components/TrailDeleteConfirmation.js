@@ -24,9 +24,7 @@ function TrailDeleteConfirmation (){
                         return Promise.reject("Something has gone wrong.");
                 }
             })
-            .then(body =>{
-                setTrail(body);
-            })
+            .then(body =>{setTrail(body);})
             .catch(err=>console.log("Error: ", err));
         }
     }, [deleteTrailId]);
@@ -46,7 +44,6 @@ function TrailDeleteConfirmation (){
                     break;
                 default:
                     return Promise.reject("Something has gone wrong.");
-
             }
         })
         .catch(err=>console.log("Error: ", err));

@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,13 +62,13 @@ class TrailSectionServiceTest {
         assertTrue(result.getErrorMessages().contains("Number of days is required."));
         assertTrue(result.getErrorMessages().contains("Section length is required and must be between 1 and 500."));
 
-        section.setLatitude(800);
+        section.setStartLatitude(800);
         result = service.add(section);
         assertTrue(result.getErrorMessages().contains("Latitude must be between -90 and 90."));
 
-        section.setLongitude(-80);
+        section.setStartLongitude(-900);
         result = service.add(section);
-        assertTrue(result.getErrorMessages().contains("Longitude must be between 0 and 180."));
+        assertTrue(result.getErrorMessages().contains("Longitude must be between -180 and 180."));
 
         section.setSectionDays(31);
         result = service.add(section);
@@ -117,8 +116,8 @@ class TrailSectionServiceTest {
         section.setTrailId(1);
         section.setSectionStart("First Town");
         section.setSectionEnd("Second Town");
-        section.setLongitude(80);
-        section.setLatitude(80);
+        section.setStartLongitude(80);
+        section.setStartLatitude(80);
         section.setSectionLength(90);
         section.setSectionDays(5);
         section.setUpcoming(true);

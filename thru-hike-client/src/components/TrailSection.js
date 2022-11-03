@@ -30,8 +30,9 @@ function TrailSection({section, sectionEditMode}){
                 case 204:
                     window.location.reload();
                     break;
-                case 400:
-                    return resp.json();
+                //TODO: add?
+                // case 400:
+                //     return resp.json();
                 case 404:
                     return null;
                     //add error message?
@@ -39,10 +40,6 @@ function TrailSection({section, sectionEditMode}){
                     return Promise.reject("Something has gone wrong");
             }
         })
-        // .then(body =>{
-        //     if(!body){
-        //     }
-        // })
         .catch(err =>console.log("Error: ", err));
     }
 

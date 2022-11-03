@@ -15,8 +15,10 @@ app_user_id int,
 trail_id int not null,
 section_start varchar(200) not null,
 section_end varchar(200) not null,
-latitude decimal(9,6) null,
-longitude decimal(9,6) null,
+start_latitude decimal(9,6) null,
+start_longitude decimal(9,6) null,
+end_latitude decimal(9,6) null,
+end_longitude decimal(9,6) null,
 section_length int not null,
 section_days int not null,
 upcoming bit not null,
@@ -105,27 +107,21 @@ constraint fk_section_alert_category_id
     references alert_category(alert_category_id)
 );
 
-create table cool_thing(
-cool_thing_id int primary key auto_increment,
+create table highlight(
+highlight_id int primary key auto_increment,
 app_user_id int,
-cool_thing_content varchar(1000) not null,
+highlight_content varchar(1000) not null,
 in_town bit not null,
 trail_id int not null,
 trail_section_id int,
-constraint fk_cool_thing_trail_section_id
+constraint fk_highlight_trail_section_id
 	foreign key (trail_section_id)
     references trail_section(trail_section_id),
-constraint fk_cool_thing_trail_id
+constraint fk_highlight_trail_id
 	foreign key (trail_id)
     references trail(trail_id)
 );
 
-create table murphys_day(
-reminder_id int primary key auto_increment,
-app_user_id int,
-reminder_name varchar(50) not null,
-reminder_content varchar(1000) null
-);
 
 create table calendar_item(
 calendar_item_id int primary key auto_increment,
@@ -142,25 +138,17 @@ exit_item_name varchar(50) not null,
 good_to_go bit not null
 );
 
-create table contact_category(
-contact_category_id int primary key auto_increment,
-app_user_id int,
-contact_category_name varchar(50) not null
-);
 
 create table town_contact(
 town_contact_id int primary key auto_increment,
 app_user_id int,
-contact_category_id int not null,
+contact_category varchar(200) not null,
 town_contact_content varchar(250) not null,
 town_contact_other_notes varchar(500) null,
 trail_section_id int not null,
 constraint fk_town_contact_trail_section_id
 	foreign key (trail_section_id)
-    references trail_section(trail_section_id),
-constraint fk_contact_category_id
-	foreign key (contact_category_id)
-    references contact_category(contact_category_id)
+    references trail_section(trail_section_id)
 );
 
 create table gear(
