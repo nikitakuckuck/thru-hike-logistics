@@ -55,6 +55,8 @@ function About(){
 
     </ul>
 
+    <p>App created by Nikita Kuckuck</p>
+
     </>)
 }
 export default About;

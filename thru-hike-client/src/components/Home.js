@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import SectionAlert from "./SectionAlert";
+import TrailImage from "./../images/forest.png";
 
 
 const DEFAULT_SECTION = {trailSectionId: 0, trailId: 0, sectionStart: "", sectionEnd: "", startLatitude: 0, startLongitude: 0, endLatitude: 0, endLongitude: 0, sectionLength: 0,sectionDays: 0, upcoming: true, trail: {trailName: ""}};
@@ -43,7 +44,7 @@ function Home (){
                 case 200:
                     return resp.json();
                 case 404:
-                    //TODO: decide what happens when there is no active section
+                    //TODO: decide what happens when there is no active section - reject promise?
                     break;
                 default:
                     return Promise.reject("Something has gone wrong.");
@@ -53,6 +54,7 @@ function Home (){
             if(!body){
                 return;
             } 
+            setActiveSection(body);
             endLat = body.endLatitude;
             endLong = body.endLongitude;
             sectionId = body.trailSectionId;
@@ -148,11 +150,22 @@ function Home (){
     
 
     return(<>
-    {activeSection ? //if there is no active section:
-    <p className="mt-10">Select a section to display on the <a href ="/sections">Sections</a> page.</p>:
+    {activeSection.trailSectionId===0 ? //if there is no active section:
+    <div>
+        <h2>Section Summary</h2>
+        <p className="mt-2">Welcome! Once you have created trails and sections, a summary for your active section will show up on this page.</p>
+        <p>To get started, check out the <a href = "/about">About</a> page for more information on available features, and then <a href ="/trails/add">add a trail</a>. Once you have added at least one trail, you'll be able to start adding sections.</p>
+        <p>You can choose which section is displayed here by setting a section as active on the <a href ="/sections">Sections</a> page.</p>
+        <div className="picture-with-credits mt-3">
+            <img src={TrailImage} className="img-fluid " alt="a stylized design of stairsteps going up a trail in the forest"/>
+            <p className="small">Image by <a href="https://pixabay.com/users/freefunart-8472313/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=7161510">Amy</a> from Pixabay</p>
+        </div>
+        
+    </div>
+    :
     <div>
     <h2>Section Summary: {activeSection.sectionStart} - {activeSection.sectionEnd}</h2>
-    <p className="mt-10">Section can be switched by setting a different section as active on <a href ="/sections">Sections</a>.</p>
+    <p className="mb-4">Section can be switched by setting a different section as active on <a href ="/sections">Sections</a>.</p>
     <div className="alert alert-red" role="alert">
         <p>Alerts:</p>
         <table>
@@ -163,12 +176,14 @@ function Home (){
               
         </table>
     </div>
-    {/* TODO: possibly add logic so the button is only visible when the checklist has at least one item? */}
+    <div className="mt-4">
+        {/* TODO: possibly add logic so the button is only visible when the checklist has at least one item? */}
     <button className={incomplete.length===0 ? "btn btn-green mb-3" : "btn btn-red mb-3"} onClick={handleExitChecklistClick}><strong>{incomplete.length===0 ? "Completed" : "Not Completed"}</strong>: Town Exit Checklist </button>
+    </div>
       
 
     {/* weather display */}
-    <h4 >Weather Forecast, 7 days:</h4>
+    <h4 className="mt-3">7 Day Weather Forecast:</h4>
     <div className="row mr-1 ml-1" >
         <div className="text-wrap border border-dark col-sm">
             <h5><strong>{activeSection.sectionStart}</strong></h5>
@@ -185,7 +200,7 @@ function Home (){
     }
  
 
-    {/* info for how weekend alerts are calculated */}
+    {/* user info for how weekend alerts are calculated */}
     <div className="modal fade" id="arrivalInfo" role="dialog" aria-labelledby="addTitle" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">

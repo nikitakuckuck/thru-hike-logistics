@@ -74,11 +74,16 @@ h2 {
 width: 100%
 }
 
-.circle-blue {
-    background-color: #94a8caa2;
+.circle {
     border-radius: 100%;
-    width: 30vh;
-    height: 30vh;
-    text-align: center;
+    border-color: #000000;
+    border-style: inset;
+    width: 50vh;
+    height: 50vh;
+}
+
+.picture-with-credits {
+    display: inline-block;
+    text-align: right;
 }
 
