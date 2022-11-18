@@ -17,14 +17,14 @@ function About(){
             <li>
                 <strong>Area alerts</strong>: add links to fire alerts, trail closures, water reports, etc.
             </li>
+            <li>
+                <strong>Weather</strong>: displaying upcoming weather for both your current town and for your next town.
+            </li>
         </ul>
     <h3 className="pt-3">Future Features:</h3>
     <p>These features don't exist yet, but they're in the works!</p>
 
     <ul>
-        <li>
-            <strong>Weather</strong>: displaying upcoming weather for both your current town and for your next town.
-        </li>
         <li>
             <strong>Calendar reminders</strong>: customizable alerts to remind you of events that will occur during your next trail section, so you can send out that birthday card before you have to title it as 'belated', or send that important email while you still have cell service. Other features include an alert if you'll hit the next town on a weekend, so you aren't unpleasantly surprised to arrive and find yourself unable to pick up a resupply box from the Post Office, or find last-minute hotels are wildly expensive due to the weekend.
         </li>
