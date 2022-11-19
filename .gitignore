@@ -13,3 +13,6 @@ target/
 
 # node
 node_modules/
+
+# api keys
+keys.txt
