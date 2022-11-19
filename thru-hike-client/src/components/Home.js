@@ -187,12 +187,12 @@ function Home (){
     <div className="row mr-1 ml-1" >
         <div className="text-wrap border border-dark col-sm">
             <h5><strong>{activeSection.sectionStart}</strong></h5>
-            {weatherStart.map(weather =><p key={weather.number}><strong>{weather.name}</strong>: {weather.detailedForecast}</p>)}
+            {weatherStart.map((weather,i) =><p key={i}><strong>{weather.name}</strong>: {weather.detailedForecast}</p>)}
                   
         </div>
         <div className="text-wrap border border-dark col-sm">
             <h5><strong>{activeSection.sectionEnd}</strong></h5>
-            {weatherEnd.map(weather =><p key={weather.number}><strong>{weather.name}</strong>: {weather.detailedForecast}</p>)}       
+            {weatherEnd.map((weather,i) =><p key={i}><strong>{weather.name}</strong>: {weather.detailedForecast}</p>)}       
         </div>
     </div>
     </div>
